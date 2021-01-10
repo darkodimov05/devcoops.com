@@ -1,0 +1,42 @@
+I"½<p>Azure subscriptions are used for deploying and consuming Azure resources. A single Azure account can have multiple subscriptions, but there are some limitations. You can combine multiple Azure resources into a single Azure Resource Group. These groups are managed by <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview">Azure Resource Manager</a>.<br />
+According to Microsoft, there are two <em>Subscription limits</em> tables: <strong>Subscription limits</strong> and <strong>Subscription limits - Azure Resource Manager</strong>.<br />
+You can check the tables on the following link: <a href="https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits">Azure subscription and service limits, quotas, and constraints</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure CLI</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="configuration">Configuration</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and list the active subscriptions:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az account list <span class="nt">--output</span> table
+</code></pre></div></div>
+<p>It will list all available subscriptions in a table format. You can output the results with other formats like: json, jsonc, yaml, and tsv.</p>
+
+<p><strong>Step 2</strong>. Run a command to change the subscription.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az account <span class="nb">set</span> <span class="nt">--subscription</span> &lt;SubscriptionId&gt;
+</code></pre></div></div>
+
+<p>Replace the <SubscriptionId> part with the actual subscription id.</SubscriptionId></p>
+
+<h2 id="check-default-subscription">Check default subscription</h2>
+
+<p>Itâ€™s always a good practice to check which subscription we are using before managing the Azure resources. There are a couple of ways to do this:</p>
+
+<p><strong>1</strong>. With <em>az account show</em> command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az account show <span class="nt">--output</span> jsonc
+</code></pre></div></div>
+<p><img src="/assets/images/screenshots/screenshot4.png" alt="Terminal AZ Subscription" /></p>
+
+<p><strong>When using <em>show</em> command, it will display the current subscription with every output format except table.</strong></p>
+
+<p><strong>2</strong>. With <em>az account list</em> command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az account list <span class="nt">--output</span> table
+</code></pre></div></div>
+<p><img src="/assets/images/screenshots/screenshot7.png" alt="Terminal AZ Subscription1" /></p>
+
+<p>Official documentation:  <a href="https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli?view=azure-cli-latest">Use multiple Azure subscriptions</a>.</p>
+:ET

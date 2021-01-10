@@ -1,0 +1,55 @@
+I"<p>Losing and resetting passwords can be quite frustrating, especially if you are working as an IT guy, who have to reset passwords every day for other employees. The same thing could happen in the cloud, especially for SysOps admins. However, there are scenarioes where you’ll have to change the Azure VM administrator password periodically. I have already talked about resetting database passwords on the <code class="language-plaintext highlighter-rouge">Azure SQL Database</code> service, covered in <a href="/how-to-recover-lost-admin-password-for-azure-sql-database-using-azure-cli/" target="_blank">How to recover lost admin password for an Azure SQL Database using Azure CLI</a>. This time, i’ll focus on how to reset passwords on the <code class="language-plaintext highlighter-rouge">Azure Virtual Machines</code> service.<br />
+There are four ways to change an Azure VM user password, including:</p>
+<ul>
+  <li>Azure Portal</li>
+  <li>Azure CLI</li>
+  <li>PowerShell cmdlets</li>
+  <li>ARM Templates</li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure VM</li>
+</ul>
+
+<h2 id="reset-azure-vm-password-using-the-cli">Reset Azure VM password using the CLI</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser, where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Run the command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az vm user update <span class="nt">--name</span> <span class="s2">"vm-test"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vm-test"</span> <span class="nt">--username</span> <span class="s2">"devcoops"</span> <span class="nt">--password</span> <span class="s2">"&lt;insert_new_password_here&gt;"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: Virtual Machine name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: resource group where the Virtual Machine belongs to.</li>
+  <li><code class="language-plaintext highlighter-rouge">--username</code>: username.</li>
+  <li><code class="language-plaintext highlighter-rouge">--password</code>: new password.</li>
+</ul>
+
+<h2 id="reset-azure-vm-password-using-the-azure-portal">Reset Azure VM password using the Azure Portal</h2>
+<p><strong>Step 3</strong>. Login to the Azure Portal and go to <strong>Virtual Machines</strong>.<br />
+<img src="/assets/images/screenshots/screenshot42.png" alt="Azure VM main" /></p>
+
+<p><strong>Step 4</strong>. Click on the instance, and in the new window, under <strong>Support + troubleshooting</strong>, click <em>Reset password</em>.<br />
+<img src="/assets/images/screenshots/screenshot43.png" alt="Azure VM reset-password" /></p>
+
+<p><strong>Step 5</strong>. On the <em>Reset password</em> tab, you can choose the following modes:</p>
+<ul>
+  <li>Reset password.</li>
+  <li>Reset SSH public key.</li>
+  <li>Reset configuration only (resets the SSH configuration).<br />
+I’ll write about the SSH configuration in the future, so for now, just click on <em>Reset password</em>, and enter the username and the new password.<br />
+<img src="/assets/images/screenshots/screenshot44.png" alt="Azure Bastion virtual-networks" /></li>
+</ul>
+
+<p><strong>Step 6</strong>. Click <strong>Update</strong>.</p>
+
+<p>Official documentation <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/extensions/vmaccess#reset-password" target="_blank">here</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>The <code class="language-plaintext highlighter-rouge">Azure CLI</code> could be quite useful, especially when there is a password policy that requires periodically changing passwords for security purposes. You could also write and schedule a script, that will generate a random password, execute the Azure CLI command to reset the password, and send the password securely via email, or even store it into a <code class="language-plaintext highlighter-rouge">Azure Key Vault</code>. My 2 cents is to always use automation when possible.</p>
+:ET

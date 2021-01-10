@@ -1,0 +1,55 @@
+I"H<p>Snapshot is a popular term in the virtual storage world. Snapshots are a full, point-in-time copies of a system, mostly virtual machines disks, known as VHDs. We could use snapshots to restore a virtual machine to a stable state, for example if we broke something and we want to do a rollback, or even create a new copy of the VM in another availability zone in the cloud, by creating an image first. <br />
+Managing snapshots in the Azure could be done by using the Portal, the PowerShell cmdlet, or the Azure CLI. Today, i’ll write about how to create quick snapshots of an Azure Virtual Machine disk, using the <code class="language-plaintext highlighter-rouge">Azure CLI</code>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure VM</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="create-a-snapshot-of-an-azure-vm-disk">Create a snapshot of an Azure VM disk</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and sign in:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser, where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Find the ID of the virtual machine disk and store it into a variable:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">diskID</span><span class="o">=</span><span class="si">$(</span>az vm show  <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--name</span> <span class="s2">"web-server-1"</span> <span class="nt">--query</span> <span class="s2">"storageProfile.osDisk.managedDisk.id"</span> | <span class="nb">grep</span> <span class="nt">-oP</span> <span class="s1">'disks/\K.+'</span> | rev | <span class="nb">cut</span> <span class="nt">-c2-</span> | rev<span class="si">)</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: the VM resource group.</li>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: VM name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--query</code>: query the VM disk ID.</li>
+</ul>
+
+<p><strong>Step 3</strong>. Create a <em>date</em> variable, for the snapshot name:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">now</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> <span class="nt">-u</span> +<span class="s2">"%Y-%m-%d-%H-%M"</span><span class="si">)</span>
+</code></pre></div></div>
+
+<p><strong>Step 4</strong>. Now, create a snapshot using the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az snapshot create <span class="nt">--name</span> <span class="s2">"Snapshot_</span><span class="nv">$now</span><span class="s2">"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--source</span> <span class="nv">$diskID</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: snapshot name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: resource group where the snapshot will be a part of.</li>
+  <li><code class="language-plaintext highlighter-rouge">--source</code>: VM’s disk ID.</li>
+</ul>
+
+<h2 id="remove-an-azure-vms-snapshot">Remove an Azure VM’s snapshot</h2>
+<p><strong>Step 5</strong>. List all snapshot in the resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az snapshot list <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span>
+</code></pre></div></div>
+
+<p><strong>Step 6</strong>. Delete the snapshot:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az snapshot delete <span class="nt">--ids</span> <span class="s2">"&lt;snapshot_id&gt;"</span>
+</code></pre></div></div>
+
+<p>Official documentation <a href="https://docs.microsoft.com/en-us/cli/azure/snapshot?view=azure-cli-latest" target="_blank">az snapshot</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>As a best practise, automate the snapshot creations, and don’t rely on snapshots only! Although snapshots could be used as a short-term backups, or ad-hoc backups, they cannot replace backups! Use <a href="https://docs.microsoft.com/en-us/azure/backup/backup-overview" target="_blank">Azure Backup</a> as a backup feature, and `<a href="https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-overview" target="_blank">Azure Site Recovery</a> for disaster recovery scenarios, which i will cover both in the future.</p>
+:ET

@@ -1,0 +1,249 @@
+I",j<p>ELK Stack is a combination of three open source tools which forms a log management tool. ELK Stack is a platform that helps in deep searching, analyzing, and visualizing the log generated from different machines.</p>
+
+<p>The ELK Stack consists of four main parts:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Elasticsearch</code>: is a tool which plays a major role in storing the logs in the JSON format, indexing it and allowing the searching of the logs. One of the important features of the Elasticsearch are:</p>
+<ul>
+  <li>It is a search engine/ search server.</li>
+  <li>It is a NoSQL based database. It means that Elasticsearch doesn’t use SQL for queries.</li>
+  <li>It is based on Apache Lucene and provides RESTful API.</li>
+  <li>It Uses indexes to search, which makes it faster.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Logstash</code>: is an open-source tool which used to collect, parse and filter system logs as the input. One of the important features of the Logstash are:</p>
+<ul>
+  <li>It is a data pipeline tool</li>
+  <li>Centralizes the data processing</li>
+  <li>Collects, parses and analyzes a large variety of structured/unstructured data and events.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Kibana</code>: is a web interface which is allowing us to search, display and compile the data. One of the important features of the Kibana are:</p>
+<ul>
+  <li>Visualization tool.</li>
+  <li>Provides real-time analysis, summarization, charting and debugging capabilities.</li>
+  <li>Provides instinctive and user-friendly interface.</li>
+  <li>Allows sharing of snapshots of the logs searched through.</li>
+  <li>Permits saving the dashboard and managing multiple dashboards.</li>
+  <li>Beats: are used to collect data from various sources and transport them to Logstash or Elasticsearch.</li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>You will have to make sure that you are logged into your Ubuntu machine as a user with <code class="language-plaintext highlighter-rouge">sudo</code> privileges</li>
+</ul>
+
+<h2 id="installing-and-configuring-elasticsearch">Installing and Configuring Elasticsearch</h2>
+
+<p>Before we started with the installation, let’s update the system:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update
+</code></pre></div></div>
+<p>As an addition requirement before we can install Elasticsearch, we will have to install Java 8. Elasticsearch requires Java 8 and it is recommended to use the Oracle JDK 1.8.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>python-software-properties software-properties-common apt-transport-https
+<span class="nb">sudo </span>add-apt-repository ppa:webupd8team/java
+</code></pre></div></div>
+<p>To install the java8-installer, execute the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>oracle-java8-installer
+</code></pre></div></div>
+<p>Once the installation is done, to make sure that the java is installed successfully run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-version</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">Output</code>:</p>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="n">version</span> <span class="s2">"1.8.0_201"</span>
+<span class="no">Java</span><span class="p">(</span><span class="no">TM</span><span class="p">)</span> <span class="no">SE</span> <span class="no">Runtime</span> <span class="no">Environment</span> <span class="p">(</span><span class="n">build</span> <span class="mf">1.8</span><span class="o">.</span><span class="mo">0_201</span><span class="o">-</span><span class="n">b09</span><span class="p">)</span>
+<span class="no">Java</span> <span class="no">HotSpot</span><span class="p">(</span><span class="no">TM</span><span class="p">)</span> <span class="mi">64</span><span class="o">-</span><span class="no">Bit</span> <span class="no">Server</span> <span class="no">VM</span> <span class="p">(</span><span class="n">build</span> <span class="mf">25.201</span><span class="o">-</span><span class="n">b09</span><span class="p">,</span> <span class="n">mixed</span> <span class="n">mode</span><span class="p">)</span>
+</code></pre></div></div>
+<p>After installing Java, we will import the Elasticsearch public GPG key into APT and add the elastic repository to the system:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO</span> - https://artifacts.elastic.co/GPG-KEY-elasticsearch | <span class="nb">sudo </span>apt-key add -
+<span class="nb">echo</span> <span class="s2">"deb https://artifacts.elastic.co/packages/6.x/apt stable main"</span> | <span class="nb">sudo tee</span> <span class="nt">-a</span> /etc/apt/sources.list.d/elastic-6.x.list
+</code></pre></div></div>
+<p>Next we will update the repository and install elasticsearch package:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get update
+apt-get <span class="nb">install </span>elasticsearch
+</code></pre></div></div>
+<p>Once the elasticsearch installation is done, go to <code class="language-plaintext highlighter-rouge">/etc/elasticsearch</code> directory and edit the configuration file <code class="language-plaintext highlighter-rouge">elasticsearch.yml</code>.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/elasticsearch/
+nano elasticsearch.yml
+</code></pre></div></div>
+<p>To get your elasticsearch working uncomment the <code class="language-plaintext highlighter-rouge">network.host</code> line and change the value to <code class="language-plaintext highlighter-rouge">localhost</code>, and uncomment the default port for elasticsearch <code class="language-plaintext highlighter-rouge">http.port</code>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>network.host: localhost
+http.port: 9200
+</code></pre></div></div>
+<p>After the changes save the file and close it.
+Next, we will start the elasticsearch service and enable it by running te following commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl start elasticsearch
+systemctl <span class="nb">enable </span>elasticsearch
+</code></pre></div></div>
+<p>After a successful installation it is always a good practice to test the installed service. We will test our Elasticsearch service by sending an HTTP request:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s2">"localhost:9200"</span>
+</code></pre></div></div>
+<p>If you followed the above steps and if your Elasticsearch service is up and running you will get some basic information about your local node, similar to this:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+ </span><span class="nl">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"yeIWhmj"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"cluster_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"cluster_uuid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2e6vC_sITGeT-PLy2r1UZA"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+ </span><span class="nl">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"6.6.0"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"build_flavor"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"build_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deb"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"build_hash"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"a9861f4"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"build_date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-01-24T11:27:09.439740Z"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"build_snapshot"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"lucene_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"7.6.0"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"minimum_wire_compatibility_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"5.6.0"</span><span class="p">,</span><span class="w">
+ </span><span class="nl">"minimum_index_compatibility_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0.0"</span><span class="w">
+ </span><span class="p">},</span><span class="w">
+ </span><span class="nl">"tagline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"You Know, for Search"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="install-and-configure-kibana">Install and Configure Kibana</h2>
+<p>We already added the Elastic package source in the previous step, so now we will install the Kibana Dashboard and configure the kibana service to run on the localhost address.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>kibana
+</code></pre></div></div>
+<p>To edit the configuration file <code class="language-plaintext highlighter-rouge">kibana.yml</code> run the following commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/kibana/
+nano kibana.yml
+</code></pre></div></div>
+<p>To get things working uncomment the  <code class="language-plaintext highlighter-rouge">server.port</code>, <code class="language-plaintext highlighter-rouge">server.host</code> and <code class="language-plaintext highlighter-rouge">elasticsearch.url</code> :</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">server.port</span><span class="pi">:</span> <span class="m">5601</span>
+<span class="s">server.host</span><span class="pi">:</span> <span class="s2">"</span><span class="s">localhost"</span>
+<span class="s">elasticsearch.hosts</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">http://localhost:9200"</span><span class="pi">]</span>
+</code></pre></div></div>
+<p>Save the file and close it.
+Now, we will start the kibana service and enable it to start on boot:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nb">enable </span>kibana
+systemctl start kibana
+</code></pre></div></div>
+<p>The kibana dashboard is now up and running on the ‘localhost’ address and the default port <code class="language-plaintext highlighter-rouge">5601</code>.</p>
+
+<p>To access the Kibana dashboard we will be using the Nginx web server as a reverse proxy. First we have to install the Nginx web server:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>nginx apache2-utils
+</code></pre></div></div>
+<p>It is recommended to disable the default Nginx configuration file and create a new virtual host file for the Kibanba dashboard.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/nginx/sites-available
+<span class="nb">rm</span> /etc/nginx/sites-enabled/default
+</code></pre></div></div>
+<p>Create a new file <code class="language-plaintext highlighter-rouge">kibana</code> and paste the following information:</p>
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+ <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+ <span class="kn">server_name</span> <span class="s">ip_address</span><span class="p">;</span>
+
+ <span class="kn">auth_basic</span> <span class="s">"Restricted</span> <span class="s">Access"</span><span class="p">;</span>
+ <span class="kn">auth_basic_user_file</span> <span class="n">/etc/nginx/.htpasswd</span><span class="p">;</span>
+
+ <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+ <span class="kn">proxy_pass</span> <span class="s">http://localhost:5601</span><span class="p">;</span>
+ <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+ <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+ <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">'upgrade'</span><span class="p">;</span>
+ <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+ <span class="kn">proxy_cache_bypass</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>For the security reason, we will create a new basic authentication web server for accessing the Kibana dashboard.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>htpasswd <span class="nt">-c</span> /etc/nginx/.htpasswd elastic
+</code></pre></div></div>
+<p>Now, it should ask you for the elastic user password.
+Next, we will activate the kibana virtual host and test all nginx configuration:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ln</span> <span class="nt">-s</span> /etc/nginx/sites-available/kibana /etc/nginx/sites-enabled/
+nginx <span class="nt">-t</span>
+</code></pre></div></div>
+<p>If you passed the nginx configuration, activate and enable it with the following commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nb">enable </span>nginx
+systemctl restart nginx
+</code></pre></div></div>
+<p>Now Kibana is accessible via your server public IP address. Open your web browser and type:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://your_server_ip/status
+</code></pre></div></div>
+<p>You will be prompted to enter the username and password which we created previously. After successful login, you can access the Kibana dashboard.</p>
+
+<p><img src="/assets/images/screenshots/kibana.png" alt="Kibana dashboard" /></p>
+
+<h2 id="install-and-configure-logstash">Install and Configure Logstash</h2>
+<p>We will use Logstash to centralize server logs from client sources. It is possible to use Beats to send data directly to the Elasticsearch database, but it is recommended using Logstash to process the data.</p>
+
+<p>Install  Logstash with the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>logstash
+</code></pre></div></div>
+<p>Logstash has three main components:</p>
+<ul>
+  <li>Input</li>
+  <li>Filter</li>
+  <li>Output</li>
+</ul>
+
+<p>We will create a file called <code class="language-plaintext highlighter-rouge">02-beats-input.conf</code> and  set up Filebeat input:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano /etc/logstash/conf.d/02-beats-input.conf
+</code></pre></div></div>
+<p>Insert the following input configuration:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">input {</span>
+ <span class="s">beats {</span>
+ <span class="s">port =&gt; </span><span class="m">5044</span>
+ <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div></div>
+<p>Next, we will create a file for filtering system logs, also known as syslogs:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano /etc/logstash/conf.d/10-syslog-filter.conf
+</code></pre></div></div>
+<p>Insert the following system log filter configuration:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">filter {</span>
+<span class="s">if [fileset][module] == "system" {</span>
+<span class="s">if [fileset][name] == "auth" {</span>
+<span class="s">grok {</span>
+<span class="s">match =&gt; { "message" =&gt; ["%{SYSLOGTIMESTAMP:[system][auth][timestamp]} %{SYSLOGHOST:[system][auth][hostname]} sshd(?:\[%{POSINT:[system][auth][pid]}\])?: %{DATA:[system][auth][ssh][event]} %{DATA:[system][auth][ssh][method]} for (invalid user )?%{DATA:[system][auth][user]} from %{IPORHOST:[system][auth][ssh][ip]} port %{NUMBER:[system][auth][ssh][port]} ssh2(</span><span class="pi">:</span> <span class="err">%</span><span class="pi">{</span><span class="nv">GREEDYDATA</span><span class="pi">:[</span><span class="nv">system</span><span class="pi">][</span><span class="nv">auth</span><span class="pi">][</span><span class="nv">ssh</span><span class="pi">][</span><span class="nv">signature</span><span class="pi">]}</span><span class="s">)?",</span>
+<span class="s2">"</span><span class="s">%{SYSLOGTIMESTAMP:[system][auth][timestamp]}</span><span class="nv"> </span><span class="s">%{SYSLOGHOST:[system][auth][hostname]}</span><span class="nv"> </span><span class="s">sshd(?:</span><span class="err">\</span><span class="s">[%{POSINT:[system][auth][pid]}</span><span class="err">\</span><span class="s">])?:</span><span class="nv"> </span><span class="s">%{DATA:[system][auth][ssh][event]}</span><span class="nv"> </span><span class="s">user</span><span class="nv"> </span><span class="s">%{DATA:[system][auth][user]}</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">%{IPORHOST:[system][auth][ssh][ip]}"</span><span class="err">,</span>
+<span class="s2">"</span><span class="s">%{SYSLOGTIMESTAMP:[system][auth][timestamp]}</span><span class="nv"> </span><span class="s">%{SYSLOGHOST:[system][auth][hostname]}</span><span class="nv"> </span><span class="s">sshd(?:</span><span class="err">\</span><span class="s">[%{POSINT:[system][auth][pid]}</span><span class="err">\</span><span class="s">])?:</span><span class="nv"> </span><span class="s">Did</span><span class="nv"> </span><span class="s">not</span><span class="nv"> </span><span class="s">receive</span><span class="nv"> </span><span class="s">identification</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">%{IPORHOST:[system][auth][ssh][dropped_ip]}"</span><span class="err">,</span>
+<span class="s2">"</span><span class="s">%{SYSLOGTIMESTAMP:[system][auth][timestamp]}</span><span class="nv"> </span><span class="s">%{SYSLOGHOST:[system][auth][hostname]}</span><span class="nv"> </span><span class="s">sudo(?:</span><span class="err">\</span><span class="s">[%{POSINT:[system][auth][pid]}</span><span class="err">\</span><span class="s">])?:</span><span class="nv"> </span><span class="err">\</span><span class="s">s*%{DATA:[system][auth][user]}</span><span class="nv"> </span><span class="s">:(</span><span class="nv"> </span><span class="s">%{DATA:[system][auth][sudo][error]}</span><span class="nv"> </span><span class="s">;)?</span><span class="nv"> </span><span class="s">TTY=%{DATA:[system][auth][sudo][tty]}</span><span class="nv"> </span><span class="s">;</span><span class="nv"> </span><span class="s">PWD=%{DATA:[system][auth][sudo][pwd]}</span><span class="nv"> </span><span class="s">;</span><span class="nv"> </span><span class="s">USER=%{DATA:[system][auth][sudo][user]}</span><span class="nv"> </span><span class="s">;</span><span class="nv"> </span><span class="s">COMMAND=%{GREEDYDATA:[system][auth][sudo][command]}"</span><span class="err">,</span>
+<span class="s2">"</span><span class="s">%{SYSLOGTIMESTAMP:[system][auth][timestamp]}</span><span class="nv"> </span><span class="s">%{SYSLOGHOST:[system][auth][hostname]}</span><span class="nv"> </span><span class="s">groupadd(?:</span><span class="err">\</span><span class="s">[%{POSINT:[system][auth][pid]}</span><span class="err">\</span><span class="s">])?:</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">group:</span><span class="nv"> </span><span class="s">name=%{DATA:system.auth.groupadd.name},</span><span class="nv"> </span><span class="s">GID=%{NUMBER:system.auth.groupadd.gid}"</span><span class="err">,</span>
+<span class="s2">"</span><span class="s">%{SYSLOGTIMESTAMP:[system][auth][timestamp]}</span><span class="nv"> </span><span class="s">%{SYSLOGHOST:[system][auth][hostname]}</span><span class="nv"> </span><span class="s">useradd(?:</span><span class="err">\</span><span class="s">[%{POSINT:[system][auth][pid]}</span><span class="err">\</span><span class="s">])?:</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">user:</span><span class="nv"> </span><span class="s">name=%{DATA:[system][auth][user][add][name]},</span><span class="nv"> </span><span class="s">UID=%{NUMBER:[system][auth][user][add][uid]},</span><span class="nv"> </span><span class="s">GID=%{NUMBER:[system][auth][user][add][gid]},</span><span class="nv"> </span><span class="s">home=%{DATA:[system][auth][user][add][home]},</span><span class="nv"> </span><span class="s">shell=%{DATA:[system][auth][user][add][shell]}$"</span><span class="err">,</span>
+<span class="s2">"</span><span class="s">%{SYSLOGTIMESTAMP:[system][auth][timestamp]}</span><span class="nv"> </span><span class="s">%{SYSLOGHOST:[system][auth][hostname]}</span><span class="nv"> </span><span class="s">%{DATA:[system][auth][program]}(?:</span><span class="err">\</span><span class="s">[%{POSINT:[system][auth][pid]}</span><span class="err">\</span><span class="s">])?:</span><span class="nv"> </span><span class="s">%{GREEDYMULTILINE:[system][auth][message]}"</span><span class="err">]</span> <span class="err">}</span>
+<span class="s">pattern_definitions =&gt; {</span>
+<span class="s2">"</span><span class="s">GREEDYMULTILINE"=&gt; "(.|\n)*"</span>
+    <span class="s">}</span>
+<span class="s">remove_field =&gt; "message"</span>
+    <span class="s">}</span>
+<span class="s">date {</span>
+<span class="s">match =&gt; [ "[system][auth][timestamp]", "MMM d HH:mm:ss", "MMM dd HH:mm:ss" ]</span>
+    <span class="s">}</span>
+<span class="s">geoip {</span>
+<span class="s">source =&gt; "[system][auth][ssh][ip]"</span>
+<span class="s">target =&gt; "[system][auth][ssh][geoip]"</span>
+    <span class="s">}</span>
+<span class="err">}</span>
+<span class="s">else if [fileset][name] == "syslog" {</span>
+<span class="s">grok {</span>
+<span class="s">match =&gt; { "message" =&gt; ["%{SYSLOGTIMESTAMP:[system][syslog][timestamp]} %{SYSLOGHOST:[system][syslog][hostname]} %{DATA:[system][syslog][program]}(?:\[%{POSINT:[system][syslog][pid]}\])?: %{GREEDYMULTILINE:[system][syslog][message]}"] }</span>
+<span class="s">pattern_definitions =&gt; { "GREEDYMULTILINE" =&gt; "(.|\n)*" }</span>
+<span class="s">remove_field =&gt; "message"</span>
+<span class="err">}</span>
+<span class="s">date {</span>
+<span class="s">match =&gt; [ "[system][syslog][timestamp]", "MMM d HH:mm:ss", "MMM dd HH:mm:ss" ]</span>
+    <span class="s">}</span>
+  <span class="s">}</span>
+ <span class="s">}</span>
+<span class="err">}</span>
+</code></pre></div></div>
+<p>Finally we will create a file for output configuration:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano /etc/logstash/conf.d/30-elasticsearch-output.conf
+</code></pre></div></div>
+<p>Insert the following output configuration:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">output {</span>
+ <span class="s">elasticsearch {</span>
+ <span class="s">hosts =&gt; ["localhost:9200"]</span>
+ <span class="s">manage_template =&gt; </span><span class="no">false</span>
+ <span class="s">index =&gt; "%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"</span>
+ <span class="s">}</span>
+<span class="err">}</span>
+</code></pre></div></div>
+<p>Now we should test the Logstash configuration with the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-u</span> logstash /usr/share/logstash/bin/logstash <span class="nt">--path</span>.settings /etc/logstash <span class="nt">-t</span>
+</code></pre></div></div>
+<p>If you get a succesfull configuration output, you can start and enable Logstash:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl start logstash
+systemctl <span class="nb">enable </span>logstash
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Finally, you learned how to install and set up an ELK stack on your Ubuntu machine. To be honest, it’s not a quick and easy process but if you get your hands dirty and follow all the steps above, you will have your ELK stack installed. For any further questions and discussions, you can leave a comment below and we will reply as soon as possible. Also you can take a look at the Elastic documentation by visiting the <a href="https://www.elastic.co/guide/index.html">Elasticsearch documentation</a>.</p>
+:ET

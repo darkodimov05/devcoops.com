@@ -1,0 +1,75 @@
+I")$<p>You cannot think of a SQL Server Administration or any kind of a relational and non-relational database administration without the two magic words: <strong>backup</strong> and <strong>restore</strong>. Backing up a database is a part of an essential operation that can prevent disaster scenarioes, like accidental corruption or deletion, and it’s often underlooked when working in a development or staging environment. If you are working as a DevOps Cloud Architect, a part of your responsibilities you’ll have to came up with a good backup and restore plan. This includes having backups on a cloud storage service, for example: Amazon S3, Azure Blob storage. You might also want to add a cold storage solution for long-term retention like Amazon Glacier and Azure Cool Storage, and most likely an on-premises storage solution.<br />
+In this post, i will focus on how to backup and restore an Azure SQL Database using the Azure CLI, as a part of the Azure SQL Database Administration series.</p>
+
+<h2 id="azure-sql-database-backups">Azure SQL Database backups</h2>
+<p>Azure SQL Database automatically create database backups that can be kept from 7 up to 35 days, which is called a Backup retention period. Azure uses <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-redundancy-grs#read-access-geo-redundant-storage" target="_blank">RA-GRS</a> type of storage blobs to ensure redundancy in case if a primary region goes down. There is also a long-term retention policy for storing backups up to 10 years on a single database and elastic pools.<br />
+Full backups are made every week, differential backups every 12 hours, and the most important ones, the transaction log backups are made every 5-10 minutes.</p>
+
+<h2 id="azure-sql-database-restore">Azure SQL Database restore</h2>
+<p>You can use the backups to restore a database to a point-in-time, to the time it was deleted, or from a specific long-term backup, if only the database has been configured with a long-term retention policy, all within the retention period. Also, you can create a new database to another geographical location from a backup.</p>
+
+<p>More about <a href="https://docs.microsoft.com/en-us/azure/sql-database/sql-database-recovery-using-backups" target="_blank">restoring dbs from backups</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure SQL database</li>
+  <li>Azure Storage account</li>
+</ul>
+
+<h2 id="backup-an-azure-sql-database">Backup an Azure SQL Database</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. There are two ways to export a database, using an SAS key or using a storage account key. I have already covered both in <a href="/how-to-manage-blobs-using-azure-cli/" target="_blank">How to manage blobs using Azure CLI</a>. I’ll use a storage account key just for the purpose of this demo. Let’s store the storage account key using a variable named <strong>accountKey</strong>, because we’ll need it for later:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">accountKey</span><span class="o">=</span><span class="sb">`</span>az storage account show-connection-string <span class="nt">--name</span> <span class="s2">"devcoopsdbaccount"</span> <span class="nt">--resource-group</span> <span class="s2">"db-backups-storage-rg"</span> <span class="nt">--query</span> connectionString <span class="nt">--output</span> tsv | <span class="nb">grep</span> <span class="nt">-oP</span> <span class="s1">'AccountKey=\K.+'</span><span class="sb">`</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: storage account name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: resource group where the storage account belongs to.</li>
+  <li><code class="language-plaintext highlighter-rouge">--query</code>: filter the result to show the connectionString only.</li>
+  <li><code class="language-plaintext highlighter-rouge">--output</code>: output format.</li>
+</ul>
+
+<p><strong>Step 3</strong>. Create a backup file name using a timestamp using a variable named <em>dbbackupFileName</em>. For example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">now</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span> <span class="nt">-u</span> +<span class="s2">"%Y-%m-%d-%H-%M"</span><span class="si">)</span>
+dbbackupFileName<span class="s2">"dbbackup-</span><span class="nv">$now</span><span class="s2">
+</span></code></pre></div></div>
+
+<p><strong>Step 4</strong>. Backup the database:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az sql db <span class="nb">export</span> <span class="nt">--server</span> <span class="s2">"devcoopsSQLserver"</span> <span class="nt">--name</span> <span class="s2">"dbName"</span> <span class="nt">--resource-group</span> <span class="s2">"db-backups-storage-rg"</span> <span class="nt">--admin-user</span> <span class="s2">"admin"</span> <span class="nt">--admin-password</span> <span class="s2">"&lt;insert_password_here&gt;"</span> <span class="nt">--storage-key-type</span> StorageAccessKey <span class="nt">--storage-key</span> <span class="nv">$accountKey</span> <span class="nt">--storage-uri</span> <span class="s2">"https://devcoopsdbaccount.blob.core.windows.net/db-backups/</span><span class="nv">$dbbackupFileName</span><span class="s2">.bacpac"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--server</code>: SQL server name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: resource group where the database belongs to.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-user</code>: admin user that will run the backup.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-password</code>: admin user password.</li>
+  <li><code class="language-plaintext highlighter-rouge">--storage-key-type</code>: type of the storage key. It could be <em>SharedAccessKey</em> or <em>StorageAccountKey</em>.</li>
+  <li><code class="language-plaintext highlighter-rouge">--storage-key</code>: the Storage Key value.</li>
+  <li><code class="language-plaintext highlighter-rouge">--storage-uri</code>: the full path for the database backup file.</li>
+</ul>
+
+<h2 id="restore-an-azure-sql-database">Restore an Azure SQL database</h2>
+<p><strong>Step 5</strong>. Import the database using the command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az sql db import <span class="nt">--server</span> <span class="s2">"devcoopsSQLserver"</span> <span class="nt">--name</span> <span class="s2">"dbName"</span> <span class="nt">--resource-group</span> <span class="s2">"db-backups-storage-rg"</span> <span class="nt">--admin-user</span> <span class="s2">"admin"</span> <span class="nt">--admin-password</span> <span class="s2">"&lt;insert_password_here&gt;"</span> <span class="nt">--storage-key-type</span> StorageAccessKey <span class="nt">--storage-key</span> <span class="nv">$accountKey</span> <span class="nt">--storage-uri</span> <span class="s2">"https://devcoopsdbaccount.blob.core.windows.net/db-backups/</span><span class="nv">$dbbackupFileName</span><span class="s2">.bacpac"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--server</code>: SQL server name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: resource group where the database belongs to.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-user</code>: admin user that will run the backup.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-password</code>: admin user password.</li>
+  <li><code class="language-plaintext highlighter-rouge">--storage-key-type</code>: type of the storage key. It could be <em>SharedAccessKey</em> or <em>StorageAccountKey</em>.</li>
+  <li><code class="language-plaintext highlighter-rouge">--storage-key</code>: the Storage Key value.</li>
+  <li><code class="language-plaintext highlighter-rouge">--storage-uri</code>: the backup full path from where an existing database will be restored.</li>
+</ul>
+
+<p>More about <a href="https://docs.microsoft.com/en-us/cli/azure/sql/db?view=azure-cli-latest" target="_blank">az sql db command</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>In this post i have described a plain example on how you can backup and restore a database from the Azure CLI. It can be quite useful in situations when you immediately need a backup. In a real world scenario, always use automation which is manageable using the Azure Portal, PowerShell or REST API.</p>
+:ET

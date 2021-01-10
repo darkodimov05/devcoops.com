@@ -1,0 +1,95 @@
+I"�<p>A shared access signature (SAS) provides secure and temporary access to the resources in a storage account. You can configure access to specific objects, as well as permissions and SAS token validation time.</p>
+
+<h2 id="sas-types">SAS types</h2>
+<p>There are few types of SAS:</p>
+<ul>
+  <li><strong>User delegation SAS</strong>: User delegation SAS is secured with Azure Active Directory (Azure AD) credentials. It delegates access only to blob storage resources.</li>
+  <li><strong>Service SAS</strong>: A service SAS is secured with the storage account key. It delegates access to one of the following Azure storage services: Blob storage, Queue storage, Table storage, or Azure files.</li>
+  <li><strong>Account SAS</strong>: An account SAS is secured with the storage account key. It delegates access to read, write and delete operations on azure storage resources, that are not permitted with a <em>service SAS</em>.</li>
+</ul>
+
+<p>Regarding security, Microsoft recommends using <strong>User delegation SAS</strong> when possible.</p>
+
+<h2 id="sas-forms">SAS forms</h2>
+<p>A SAS can take one of two forms:</p>
+<ul>
+  <li><strong>Ad hoc SAS</strong>: This is the default SAS form. Any type of SAS can be an Ad hoc SAS. The start time, expiration time and permissions are all included in the SAS URI.</li>
+  <li><strong>Service SAS with stored access policy</strong>: A stored access policy operates on a resource container level, which can be: blob container, table, queue or file share. The SAS inherits the start time, expiration time, and permissions defined in the stored access policy.</li>
+</ul>
+
+<p>More about <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview">Azure SAS</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure CLI</li>
+  <li>Azure Storage account</li>
+</ul>
+
+<h2 id="create-a-user-delegation-sas-for-a-blob">Create a user delegation SAS for a blob</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Run the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage blob generate-sas <span class="nt">--account-name</span> devcoopsstorage1 <span class="nt">--container-name</span> myfirstblobcontainer <span class="nt">--name</span> index.php <span class="nt">--permissions</span> acdrw <span class="nt">--expiry</span> 2019-10-02
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--account-name</code>: name of the storage account.</li>
+  <li><code class="language-plaintext highlighter-rouge">--container-name</code>: name of the storage container.</li>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: name of the blob file.</li>
+  <li><code class="language-plaintext highlighter-rouge">--permissions</code>:
+    <ul>
+      <li>a = Add</li>
+      <li>c = Create</li>
+      <li>d = Delete</li>
+      <li>r = Read</li>
+      <li>w = Write</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">--expiry</code>: datetime (Y-m-d’T’H:M’Z’) at which SAS becomes invalid.</li>
+</ul>
+
+<p>It will return SAS token:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"se=2019-10-02&amp;sp=racwd&amp;sv=2018-11-09&amp;sr=b&amp;sig=Co9T1DZwcbVNSPy4ACD2Lyjob0KlN3QBKyiIV6fQHjg%3D"
+</code></pre></div></div>
+
+<p><strong>Note</strong>: SAS token is a string that you generate on the client side. You can create unlimited number of tokens, which also are not tracked by Azure Storage in any way.</p>
+
+<p><strong>Step 3</strong>. Run the same command with the <em>–full-uri</em> parameter:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage blob generate-sas <span class="nt">--account-name</span> devcoopsstorage1 <span class="nt">--container-name</span> myfirstblobcontainer <span class="nt">--name</span> index.php <span class="nt">--permissions</span> acdrw <span class="nt">--expiry</span> 2019-10-02 <span class="nt">--full-uri</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--full-uri</code>: It will return the SAS URI.</li>
+</ul>
+
+<p>URL of the blob in the Azure Storage:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://devcoopsstorage1.blob.core.windows.net/myfirstblobcontainer/index.php
+</code></pre></div></div>
+
+<p>Returned SAS URI:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"https://devcoopsstorage1.blob.core.windows.net/myfirstblobcontainer/index.php?se=2019-10-02&amp;sp=racwd&amp;sv=2018-11-09&amp;sr=b&amp;sig=Co9T1DZwcbVNSPy4ACD2Lyjob0KlN3QBKyiIV6fQHjg%3D"
+</code></pre></div></div>
+
+<p>As you can see, the SAS URI is created from two parts:</p>
+<ul>
+  <li>The Storage Resource URI: <code class="language-plaintext highlighter-rouge">https://devcoopsstorage1.blob.core.windows.net/myfirstblobcontainer/index.php?</code></li>
+  <li>The SAS Token: <code class="language-plaintext highlighter-rouge">se=2019-10-02&amp;sp=racwd&amp;sv=2018-11-09&amp;sr=b&amp;sig=Co9T1DZwcbVNSPy4ACD2Lyjob0KlN3QBKyiIV6fQHjg%3D</code></li>
+</ul>
+
+<p><strong>Note</strong>: When an application sends a SAS URI to Azure as part of a request, the Azure storage service checks the SAS parameters and signature to verify that it’s valid.</p>
+
+<h2 id="revoke-a-user-delegation-sas">Revoke a user delegation SAS</h2>
+
+<p><strong>Step 4</strong>. Run the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage account revoke-delegation-keys <span class="nt">--name</span> devcoopsstorage1 <span class="nt">--resource-group</span> storage-rg
+</code></pre></div></div>
+
+<h2 id="next-steps">Next steps</h2>
+<p>We can try to grant limited access to storage containers as well using <strong>user delegation SAS</strong>.</p>
+
+<p>Official documentation: <a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-cli">Create a user delegation SAS for a container or blob with the Azure CLI</a>.</p>
+:ET

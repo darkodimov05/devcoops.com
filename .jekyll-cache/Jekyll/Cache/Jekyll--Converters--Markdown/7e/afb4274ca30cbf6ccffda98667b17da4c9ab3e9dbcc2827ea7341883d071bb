@@ -1,0 +1,134 @@
+I"'-<p>Nowadays load balancers are mostly used for improving the distribution of workloads across multiple computing resources, improving the scalability, redundancy and the deliverability of the resources. In short, a load balancer should achieve two main objectives:</p>
+
+<ul>
+  <li>The ability to distribute requests to multiple servers thus reducing the load on those individual servers</li>
+  <li>Provide redundancy</li>
+</ul>
+
+<p>Providing redundancy is when one or more of our load balanced servers fail for whichever reason, the load balancer needs to recognize that and redirect the requests to any of the remaining available servers. When we say distribute or redirect of course we mean on <code class="language-plaintext highlighter-rouge">proxy</code>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Already installed <a href="https://devcoops.com/how-to-install-nginx-on-ubuntu18.04/">nginx web server</a></li>
+  <li>Installed php on your machine</li>
+  <li>Make sure that you are logged into your Linux machine as a user with <code class="language-plaintext highlighter-rouge">sudo</code> privileges</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="creating-multiple-php-servers">Creating multiple PHP servers</h2>
+<p>To demonstrate the usage of the <code class="language-plaintext highlighter-rouge">Nginx</code> load balancer I will create a multiple PHP servers. I will simply have them each return and identifying plain message.</p>
+
+<p><strong>Step 1</strong>. First let’s create a directory where we will store the PHP servers and create them separately:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /var/www/php_servers
+<span class="nb">cd</span> /var/www/php_servers
+</code></pre></div></div>
+
+<p><strong>Step 2</strong>. Now we will create the first server using the command line interface. We will store the information in the <code class="language-plaintext highlighter-rouge">s1</code> file, and there is no need for an extension here because the PHP server doesn’t care about the input file type.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'PHP Server 1'</span> <span class="o">&gt;</span> s1
+</code></pre></div></div>
+<p>Using the above <code class="language-plaintext highlighter-rouge">echo</code> command we will create the others two servers:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'PHP Server 2'</span> <span class="o">&gt;</span> s2
+<span class="nb">echo</span> <span class="s1">'PHP Server 3'</span> <span class="o">&gt;</span> s3
+</code></pre></div></div>
+<p>Now to make sure that are created you can list them using:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span> 
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">output</code> should be similar to this:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>   <span class="mi">13</span>  <span class="mi">27</span> <span class="mi">15</span><span class="o">:</span><span class="mo">00</span> <span class="n">s1</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>   <span class="mi">13</span>  <span class="mi">27</span> <span class="mi">15</span><span class="o">:</span><span class="mo">02</span> <span class="n">s2</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>   <span class="mi">13</span>  <span class="mi">27</span> <span class="mi">15</span><span class="o">:</span><span class="mo">02</span> <span class="n">s3</span>
+</code></pre></div></div>
+<p><strong>Step 3</strong>. Next we will start the servers separately with the following commands in a separete console window:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-S</span> localhost:10001 s1
+php <span class="nt">-S</span> localhost:10002 s2
+php <span class="nt">-S</span> localhost:10003 s3 
+</code></pre></div></div>
+<p>To make sure that the servers are up and running, we will test the first one with the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:10001
+</code></pre></div></div>
+<p>If everything is Ok you should see :</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PHP Server 1
+</code></pre></div></div>
+<p>Of course in a real world example these servers would much more likely be serving the exact same data given the same requests, but we will have to distinguish them in order to test our load balancer.</p>
+
+<h2 id="setting-up-nginx-as-a-load-balancer">Setting up Nginx as a load balancer</h2>
+<p>First open a new console window and navigate to the <code class="language-plaintext highlighter-rouge">Nginx</code> default configuration :</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/nginx
+nano nginx.conf
+</code></pre></div></div>
+<p>Remove the whole content in the <code class="language-plaintext highlighter-rouge">nginx.conf</code> configuration file and paste the following:</p>
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">user</span> <span class="s">www-data</span><span class="p">;</span>
+<span class="k">worker_processes</span> <span class="s">auto</span><span class="p">;</span>
+
+<span class="k">events</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="k">http</span> <span class="p">{</span>
+
+  <span class="kn">upstream</span> <span class="s">php_servers</span> <span class="p">{</span>
+
+    <span class="kn">server</span> <span class="nf">localhost</span><span class="p">:</span><span class="mi">10001</span><span class="p">;</span>
+    <span class="kn">server</span> <span class="nf">localhost</span><span class="p">:</span><span class="mi">10002</span><span class="p">;</span>
+    <span class="kn">server</span> <span class="nf">localhost</span><span class="p">:</span><span class="mi">10003</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kn">server</span> <span class="p">{</span>
+
+        <span class="kn">listen</span> <span class="mi">8888</span><span class="p">;</span>
+        <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+        <span class="kn">root</span> <span class="n">/var/www/php_servers</span><span class="p">;</span>
+
+        <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+
+          <span class="kn">proxy_pass</span> <span class="s">http://php_servers</span><span class="p">;</span>
+        <span class="p">}</span>
+
+   <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+<p>Let’s explain the configuration:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">upstream</code> This is a contex or block in Nginx server that group several servers with the ability to add some options.</li>
+  <li><code class="language-plaintext highlighter-rouge">listen</code> we are telling the Nginx server to listen to the <code class="language-plaintext highlighter-rouge">8888</code> specific port, default is <code class="language-plaintext highlighter-rouge">80</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">location /</code> This means all requests for / go to the any of the servers listed under <code class="language-plaintext highlighter-rouge">upstream php_servers</code>, with a preference for port.</li>
+</ul>
+
+<p><strong>Step 1</strong>. To monitor the load balancing we are going to issue these <code class="language-plaintext highlighter-rouge">curl</code> commands to the <code class="language-plaintext highlighter-rouge">nginx</code> server using a simple <code class="language-plaintext highlighter-rouge">while</code> loop on the command line :</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while </span><span class="nb">sleep </span>0.5<span class="p">;</span> <span class="k">do </span>curl http://localhost:8888<span class="p">;</span> <span class="k">done</span>
+</code></pre></div></div>
+<p>So basically we are creating a loop which sleeps for half a second on every iteration and then performs the <code class="language-plaintext highlighter-rouge">curl</code> command on our Nginx load balancer.</p>
+
+<p>If you executed the <code class="language-plaintext highlighter-rouge">while</code> loop you should see the output like below:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PHP Server 1
+PHP Server 2
+PHP Server 3
+PHP Server 1
+PHP Server 2
+PHP Server 3
+PHP Server 1
+PHP Server 2
+PHP Server 3
+</code></pre></div></div>
+<p>So Nginx is balancing our requests by sending them to each page piece server in turn. This default behavior is reffered to as <code class="language-plaintext highlighter-rouge">Round Robin</code>, meaning to simply send the next request to the next server in the <code class="language-plaintext highlighter-rouge">upstream</code>.</p>
+
+<p><strong>Step 1</strong>. As we mentioned before the second purpose of a load balancer is to provide us with some <code class="language-plaintext highlighter-rouge">redundancy</code>.
+We can test this by killing one or two of our PHP servers. We will kill the server1 with the followinng command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">kill</span> <span class="nt">-9</span> <span class="o">[</span>process_id]
+</code></pre></div></div>
+<p>You can find the <code class="language-plaintext highlighter-rouge">process_id</code> by using the <code class="language-plaintext highlighter-rouge">ps</code> command.</p>
+
+<p>After that you will get <code class="language-plaintext highlighter-rouge">output</code> like this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PHP Server 2
+PHP Server 3
+PHP Server 2
+PHP Server 3
+PHP Server 2
+PHP Server 3
+PHP Server 2
+PHP Server 3
+</code></pre></div></div>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this tutorial we shown you how to use and configure Nginx as a simple and robust load balancer. Nginx can be configured with some different variants of load balancing. For more details you can visit the <a href="http://nginx.org/en/docs/http/load_balancing.html">Nginx load balancing documentation</a>.</p>
+:ET

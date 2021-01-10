@@ -1,0 +1,2 @@
+I"<p>An Azure storage account is used to store all of your Azure data objects. For example: blobs, files, disks, tables, and queues. Even though the storage account is publicly accessible over HTTP or HTTPS using endpoints, it is securable, highly available, durable and scalable.</p>
+:ET

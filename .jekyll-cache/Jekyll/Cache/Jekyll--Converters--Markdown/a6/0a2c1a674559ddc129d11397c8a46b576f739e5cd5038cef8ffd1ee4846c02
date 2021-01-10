@@ -1,0 +1,80 @@
+I"g<p><strong>Azure Key Vault</strong> is centralized Azure cloud service that securely stores secrets. A secret can be a password, API, or even certificates. Besides Secrets Management, Azure Key Vault can be used as a Key Management solution which simplifies creation and control of encryption keys used to encrypt data. It can also be used as Certificate Management for provisioning, managing and deploying SSL/TLS certificates, or even provides storing secrets protected by Hardware Security Modules. There are many reasons to use key management solutions, especially working as a DevOps engineer could help you protect secrets that are used in an automation scenario, for example CI/CD pipelines.<br />
+There are two important terms:</p>
+<ul>
+  <li><strong>Vault owner</strong>: A vault owner have full access and control over the key vault.</li>
+  <li><strong>Vault consumer</strong>: A vault consumer can perform actions inside the key vault based on the given permissions granted by the vault owner.</li>
+</ul>
+
+<p>Official documentation <a href="https://docs.microsoft.com/en-us/azure/key-vault/" target="_blank">Azure Key Vault documentation</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="create-a-key-vault">Create a Key Vault</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Create a resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group create <span class="nt">--name</span> <span class="s2">"key-vault-rg"</span> <span class="nt">--location</span> westeurope
+</code></pre></div></div>
+
+<p><strong>Step 3</strong>. Create a Key Vault:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az keyvault create <span class="nt">--name</span> <span class="s2">"devcoopskeyvault"</span> <span class="nt">--resource-group</span> <span class="s2">"key-vault-rg"</span> <span class="nt">--location</span> westeurope
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: name of the Key Vault. It must be a unique name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: name of the resource group where Key Vault will be created.</li>
+  <li><code class="language-plaintext highlighter-rouge">--location</code>: location of the Key Vault.</li>
+</ul>
+
+<p>The output will be json format which will return a lot of data. The most important properties are:</p>
+<ul>
+  <li><strong>Vault Name</strong>: The name of the vault “devcoopsvault”.</li>
+  <li><strong>Vault URI</strong>: the URI that your applications will use through vault API, or in my case: “https://devcoopsvault.vault.azure.net/”.</li>
+</ul>
+
+<p><strong>Note</strong>: The only authorized account that can have access to the key vault is your Azure account, unless you configure Access Control and Access Policies.</p>
+
+<h2 id="add-a-secret-to-the-key-vault">Add a secret to the Key Vault</h2>
+
+<p><strong>Step 4</strong>. Let’s store a secret by running the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az keyvault secret <span class="nb">set</span> <span class="nt">--vault-name</span> <span class="s2">"devcoopskeyvault"</span> <span class="nt">--name</span> <span class="s2">"DBPassword"</span> <span class="nt">--value</span> <span class="s2">"NX5HeUzm34t2cGXA"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--vault-name</code>: name of the Key Vault where we want to store a secret.</li>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: name of the secret. In my case i want to store database password, so i named it “DBPassword”.</li>
+  <li><code class="language-plaintext highlighter-rouge">--value</code>: Password for the database.</li>
+</ul>
+
+<p><strong>Note</strong>: The password is random generated on <a href="https://passwordsgenerator.net/" target="_blank">Strong Random Password Generator</a>. My two cents on password best practices is using passphrase instead of passwords.</p>
+
+<p><strong>Step 5</strong>. To view the password value as a plain text, use the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az keyvault secret show <span class="nt">--name</span> <span class="s2">"DBPassword"</span> <span class="nt">--vault-name</span> <span class="s2">"devcoopskeyvault"</span>
+</code></pre></div></div>
+<p>The password will be shown in the <strong>value</strong> parameter.</p>
+
+<h2 id="cleaning-up">Cleaning up</h2>
+
+<p><strong>Step 7</strong>. Remove key vault secret:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az keyvault secret delete <span class="nt">--name</span> <span class="s2">"DBPassword"</span> <span class="nt">--vault-name</span> <span class="s2">"devcoopskeyvault"</span>
+</code></pre></div></div>
+
+<p><strong>Step 8</strong>. Delete the key vault:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az keyvault delete <span class="nt">--name</span> <span class="s2">"devcoopskeyvault"</span> <span class="nt">--resource-group</span> <span class="s2">"key-vault-rg"</span>
+</code></pre></div></div>
+
+<p><strong>Step 9</strong>. Delete the resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete <span class="nt">--name</span> <span class="s2">"key-vault-rg"</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Storing plain text passwords and unprotected certificate keys often leads to a security breach, which can easily be prevented using Azure Key Vault.</p>
+:ET

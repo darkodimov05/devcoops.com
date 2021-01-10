@@ -1,0 +1,62 @@
+I"�<p>Azure App Service Domains let you buy and manage top-level domains directly from the Azure Portal. These domains will be hosted on the Azure DNS Service, that you can easily map to your existing Web Apps or Virtual Machines. Azure DNS provides certain advantages like performance and security within the Microsoft Azure ecosystem. I have already talked about creating custom public DNS zones in the last <a href="/how-to-create-and-manage-public-azure-dns-using-azure-cli/" target="_blank">post</a>, so if you got the time please read it.</p>
+
+<p>There are currently 9 top-level domains that are supported by Azure App Service Domains:</p>
+<ul>
+  <li>.com</li>
+  <li>.net</li>
+  <li>.co.uk</li>
+  <li>.org</li>
+  <li>.nl</li>
+  <li>.in</li>
+  <li>.biz</li>
+  <li>.org.uk</li>
+  <li>.co.in</li>
+</ul>
+
+<p>Check the official documentation <a href="https://docs.microsoft.com/en-us/azure/app-service/manage-custom-dns-buy-domain" target="_blank">Buy a custom domain name for Azure App Service</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Remove the spending limit on your subscription</li>
+</ul>
+
+<h2 id="create-app-service-domain">Create App Service domain</h2>
+<p><strong>Step 1</strong>. Login to the Azure Portal.</p>
+
+<p><strong>Step 2</strong>. Go to the Azure Marketplace, search for “Azure App Domains, and open the service. It should display a blank page with the following button in the center:<br />
+<img src="/assets/images/screenshots/screenshot22.png" alt="Create App Service Domain button" /></p>
+
+<p><strong>Step 3</strong>. Click <strong>Create App Service domain</strong>. It will open another view:<br />
+<img src="/assets/images/screenshots/screenshot23.png" alt="Create App Service Domain main view" /></p>
+
+<p><strong>Step 4</strong>. Now, enter the domain name you want to purchase. In my example i have used the “devcoops.com” domain to see what will happen.<br />
+<img src="/assets/images/screenshots/screenshot24.png" alt="Create App Service Domain main view domain-name" /></p>
+
+<p><strong>Note</strong>: Since <strong>.com</strong> domain is already in use, as you can see, it automatically mark the first available domain, and in my case taht is “devcoops.biz”. Pretty good domain name suggestions.</p>
+
+<p><strong>Step 5</strong>. In the next field, you’ll have to choose type of subscription and resource group. Let’s create new resource group named <em>app-service-domain-rg</em>.<br />
+<img src="/assets/images/screenshots/screenshot25.png" alt="Create App Service Domain main view subscription-and-resource-group" /></p>
+
+<p><strong>Step 6</strong>. Next, we got the <em>Contact Information</em> form, where we need to add the required fields like: First Name, Last Name, Email,  Country Code,  Phone, Address 1, Country, State or teritory, City and finally Postal Code. It’s pretty much standard procedure to registar a domain just as you would with any other domain name provider.<br />
+<img src="/assets/images/screenshots/screenshot26.png" alt="Create App Service Domain main view contact-information" /></p>
+
+<p><strong>Step 7</strong>. Once you fill in the <em>Contact Information</em> click <strong>OK</strong>. Now, open the <em>Privacy protection</em> view. <br />
+<img src="/assets/images/screenshots/screenshot27.png" alt="Create App Service Domain main view privacy-protection" /></p>
+
+<p><strong>Note</strong>: As you can see, by default <em>privacy protection</em> is turned on. But, you cannot use on the following domains: <em>co.uk</em>, <em>in</em>, <em>org.uk</em>, <em>co.in</em>. <em>Privacy *Protection</em> doesn’t come with additional cost, so it’s a nice benefit to have.</p>
+
+<p><strong>Step 8</strong>. On the last view <em>Legal Terms</em>, there is the pricing details and the legal terms as well.<br />
+<a href="/assets/images/screenshots/screenshot28.png">Create App Service Domain main view legal-terms</a></p>
+
+<p><strong>Note</strong>: As you can see from the screenshot, Azure App Service Domains is using <a href="godaddy.com" target="_blank">GoDaddy</a> for domain registration.</p>
+
+<p><strong>Step 9</strong>. Click the <strong>Create</strong> button, and you’ll have to wait for the validation of the domain order.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>As everything already migrating to the cloud, I think it’s worth to purchase and manage custom domains using the Azure App Service Domains, if you are already using other Azure Services, mainly because of two things:</p>
+<ul>
+  <li>GoDaddy is one of the most, if not the most popular domain name registrar.</li>
+  <li>You can manage almost everything from the Azure Portal, or even could use automation options like ARM templates, PowerShell and Azure CLI.</li>
+</ul>
+:ET

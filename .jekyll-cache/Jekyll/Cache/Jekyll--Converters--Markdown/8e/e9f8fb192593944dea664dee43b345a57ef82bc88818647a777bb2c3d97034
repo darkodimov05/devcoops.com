@@ -1,0 +1,72 @@
+I"�<p>In the last <a href="/how-to-quickly-create-a-backup-of-an-azure-vm-using-the-azure-cli/" target="_blank">post</a>, i was talking about taking Azure Virtual Machines disk snapshots, and why it’s not a good idea to replace backups with snapshots. For today’s post, i’ll write about how to easily and quickly take backups from the <code class="language-plaintext highlighter-rouge">Azure Backup</code> service, using the Azure CLI.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure VM</li>
+</ul>
+
+<h2 id="create-a-backup-vault">Create a backup vault</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and sign in:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser, where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. First, we need a vault, where we’ll be storing the backups. Create a vault using the command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az backup vault create <span class="nt">--name</span> <span class="s2">"azure-vm-backup-vault"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--location</span> westeurope
+</code></pre></div></div>
+<p>Example json output:<br />
+<img src="/assets/images/screenshots/screenshot45.png" alt="Azure backup vault" /></p>
+
+<p><strong>Step 3</strong>. Confirm the vault’s creation by listing vaults in the resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az backup vault list <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--output</span> table
+</code></pre></div></div>
+<p><img src="/assets/images/screenshots/screenshot46.png" alt="Azure backup vault" /></p>
+
+<h2 id="enable-and-take-a-backup">Enable and take a backup</h2>
+<p><strong>Step 4</strong>. Enable Azure VM’s backup:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az backup protection enable-for-vm <span class="nt">--policy-name</span> <span class="s2">"DefaultPolicy"</span> <span class="nt">--vault-name</span> <span class="s2">"azure-vm-backup-vault"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--vm</span> <span class="s2">"&lt;azure_vm_name&gt;"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--policy-name</code>: DefaultPolicy name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--vault-name</code>: name of the backup vault.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: vault’s resource group.</li>
+  <li><code class="language-plaintext highlighter-rouge">--vm</code>: VM’s name, or ID. You could use the VM’s name <strong>only if</strong> the VM and vault are in the same resource group.<br />
+Check the <em>status</em> property in the json output:<br />
+<img src="/assets/images/screenshots/screenshot47.png" alt="Azure backup vault" /></li>
+</ul>
+
+<p><strong>Step 5</strong>. Now, take a backup:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az backup protection backup-now <span class="nt">--vault-name</span> <span class="s2">"azure-vm-backup-vault"</span> <span class="nt">--container-name</span> <span class="s2">"web-server-1"</span>  <span class="nt">--item-name</span> <span class="s2">"web-server-1"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--retain-until</span> 31-12-2019
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--vault-name</code>: backup vault’s name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--container-name</code>: VM name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--item-name</code>: VM name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: vault’s resource group.</li>
+  <li><code class="language-plaintext highlighter-rouge">--retain-until</code>: last available date for the backup.</li>
+</ul>
+
+<p><strong>Step 6</strong>. Check the backup status:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az backup job list <span class="nt">--vault-name</span> <span class="s2">"azure-vm-backup-vault"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--output</span> table
+</code></pre></div></div>
+<p>Example json output:<br />
+<img src="/assets/images/screenshots/screenshot48.png" alt="Azure backup show-status" /></p>
+
+<h2 id="cleanup">Cleanup</h2>
+<p><strong>Step 7</strong>. Disable the backup protection:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az backup protection disable <span class="nt">--vault-name</span> <span class="s2">"azure-vm-backup-vault"</span> <span class="nt">--container-name</span> <span class="s2">"web-server-1"</span> <span class="nt">--item-name</span> <span class="s2">"web-server-1"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span> <span class="nt">--delete-backup-data</span> <span class="nb">true</span>
+</code></pre></div></div>
+
+<p><strong>Step 8</strong>. Remove the backup vault:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az backup vault delete <span class="nt">--name</span> <span class="s2">"azure-vm-backup-vault"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-vms-rg"</span>
+</code></pre></div></div>
+
+<p><strong>Step 9</strong>. Remove the resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete <span class="nt">--name</span> <span class="s2">"azure-vms-rg"</span>
+</code></pre></div></div>
+
+<p>Official documentation <a href="https://docs.microsoft.com/en-us/azure/backup/quick-backup-vm-cli" target="_blank">Back up a virtual machine in Azure with the CLI</a>.</p>
+:ET

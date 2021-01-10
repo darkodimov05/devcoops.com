@@ -1,0 +1,135 @@
+I"¢1<p>The AWS CLI is an Amazon Command Line Interface that communicates with the AWS API and allows you to manage your AWS services from a terminal session from your local machine. The AWS CLI is a powerfull tool because it enables developers and devops engineers to have a full control over their Amazon public cloud services by typing commands on a specified line. With AWS CLI you can do everything that is also possible with the AWS Management Console. For an example you can make efficient file transfers to and from Amazon S3 -&gt; <a href="https://jenkins.io/doc/">how to copy from AWS S3 bucket to Azure Blob Storage</a>. In this tutorial we will guide you through the installing process of AWS CLI and we will see how you can create a multiple named profiles and switch over them.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>AWS account</li>
+  <li>Make sure that you are logged into your Linux machine as a user with <code class="language-plaintext highlighter-rouge">sudo</code> privileges</li>
+</ul>
+
+<h2 id="installing-aws-cli">Installing AWS CLI</h2>
+<p><strong>Step 1</strong>. Before we can install the AWS CLI on our machine we have to make sure that python and pip are already installed. To make sure run the following commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>python3 <span class="nt">-V</span>
+<span class="nb">sudo </span>pip3 <span class="nt">-V</span>
+</code></pre></div></div>
+<p>If the output shows you that <code class="language-plaintext highlighter-rouge">no packages are installed</code> you need to follow the next steps.</p>
+
+<p><strong>Step 2</strong>. Next we will show you how to install Python3 and pip for Python3. You need to complete the following steps to install Python3 along with pip3.</p>
+
+<p>First update the package list using the following command and install the prerequisites:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>software-properties-common
+</code></pre></div></div>
+<p><strong>Step 3</strong>. Now add the deadsnakes PPA to your sources list:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>add-apt-repository ppa:deadsnakes/ppa
+</code></pre></div></div>
+<p>Press <code class="language-plaintext highlighter-rouge">Enter</code> to continue and install Python3.7:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>python3.7
+</code></pre></div></div>
+<p><strong>Step 4</strong>. To install pip for Python 3 run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>python3-pip
+</code></pre></div></div>
+<p>Now we can make sure that pip3 is installed by checking the pip version with the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nt">--version</span>
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">Output</code> should look something like this:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip 9.0.1 from /usr/lib/python3/dist-packages <span class="o">(</span>python 3.6<span class="o">)</span>
+</code></pre></div></div>
+<p>Once you are finished with the python and pip installation we can continue with the AWS CLI installation.</p>
+
+<p><strong>Step 4</strong>. We can install AWS CLI simply by running the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install </span>awscli <span class="nt">--upgrade</span> <span class="nt">--user</span>
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">--upgrade</code> option tells pip3 to upgrade any requirements that are already installed. The <code class="language-plaintext highlighter-rouge">--user</code> option tells pip3 to install the program to a subdirectory of your user directory to avoid modifying libraries used by your operating system.</p>
+
+<p>If you followed the above steps you have successfully installed <code class="language-plaintext highlighter-rouge">AWS CLI</code>. Just to make sure run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws <span class="nt">--version</span>
+</code></pre></div></div>
+<p>The <code class="language-plaintext highlighter-rouge">Output</code> should be similar to the following:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws-cli/1.16.253 Python/3.7 Linux/5.0.0-31-generic botocore/1.12.243
+</code></pre></div></div>
+<p>Also, if you want to check which packages are <code class="language-plaintext highlighter-rouge">outdated</code> use the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>pip3 list <span class="nt">-o</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">Output</code>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Package      Version  Latest   Type 
+<span class="nt">------------</span> <span class="nt">--------</span> <span class="nt">--------</span> <span class="nt">-----</span>
+asn1crypto   0.24.0   1.0.1    wheel
+awscli       1.16.253 1.16.255 wheel
+botocore     1.12.243 1.12.245 wheel
+cryptography 2.1.4    2.7      wheel
+idna         2.6      2.8      wheel
+ipaddress    1.0.17   1.0.22   wheel
+keyring      10.6.0   18.0.1   wheel
+keyrings.alt 3.0      3.1.1    wheel
+pygobject    3.26.1   3.34.0   sdist
+pyxdg        0.25     0.26     wheel
+rsa          3.4.2    4.0      wheel
+setuptools   39.0.1   41.4.0   wheel
+six          1.11.0   1.12.0   wheel
+wheel        0.30.0   0.33.6   wheel
+</code></pre></div></div>
+<p>If you find your current version in the table, you can upgrade it with the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--upgrade</span> <span class="nt">--user</span> awscli
+</code></pre></div></div>
+<h2 id="create-multiple-named-profiles">Create multiple named profiles</h2>
+
+<p><strong>Step 1</strong>. If you navigate to your home directory and list all the files you should see a hidden <code class="language-plaintext highlighter-rouge">.aws</code> folder:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-la</span> ~
+</code></pre></div></div>
+<p>Navigate to the AWS directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/.aws/
+</code></pre></div></div>
+<p><strong>Step 2</strong>. Here you will find two configuration files <code class="language-plaintext highlighter-rouge">config</code> and <code class="language-plaintext highlighter-rouge">credentials</code>. In the fist one <code class="language-plaintext highlighter-rouge">config</code> you need to configure your profiles by simply setting up the <code class="language-plaintext highlighter-rouge">region</code> and the output format. 
+The <code class="language-plaintext highlighter-rouge">config</code> file should look like the following:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">default</span><span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">json</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">eu</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mi">1</span>
+
+<span class="p">[</span><span class="n">profile</span> <span class="n">user1</span><span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">json</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">eu</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mi">1</span>
+
+<span class="p">[</span><span class="n">profile</span> <span class="n">user2</span><span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">json</span>
+<span class="n">region</span> <span class="o">=</span> <span class="n">eu</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mi">1</span>
+</code></pre></div></div>
+<p>The AWS CLI supports three different output formats:</p>
+<ul>
+  <li>JSON (json)</li>
+  <li>Tab-delimited text (text)</li>
+  <li>ASCII-formatted table (table)</li>
+</ul>
+
+<p>In the second one <code class="language-plaintext highlighter-rouge">credentials</code> are stored the user <code class="language-plaintext highlighter-rouge">aws_access_key_id</code> and <code class="language-plaintext highlighter-rouge">aws_secret_access_key</code> which you can find them using the AWS Management Console, open the <code class="language-plaintext highlighter-rouge">IAM</code> service, select the user that you want to use and navigate to the <code class="language-plaintext highlighter-rouge">Security Credentials</code> section.</p>
+
+<p><strong>Step 3</strong>. Once you have the <code class="language-plaintext highlighter-rouge">aws_access_key_id</code> and <code class="language-plaintext highlighter-rouge">aws_secret_access_key</code> of the user you should put them into the <code class="language-plaintext highlighter-rouge">credentials</code> file:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">default</span><span class="p">]</span>
+<span class="n">aws_access_key_id</span> <span class="o">=</span> <span class="n">AKIA44QJSDKDJSKHMHZYZ</span>
+<span class="n">aws_secret_access_key</span> <span class="o">=</span> <span class="n">U7uyCrEfVC4JP7LdsadsgsagsapQgawI88BsU2ByrJgyMOajaE</span>
+
+<span class="p">[</span><span class="n">user1</span><span class="p">]</span>
+<span class="n">aws_access_key_id</span> <span class="o">=</span> <span class="n">AKIAVQUFPSJGLSSLVVPJ</span>
+<span class="n">aws_secret_access_key</span> <span class="o">=</span> <span class="n">wgsau4Lq5JbU0</span><span class="o">-</span><span class="n">Cgdasdahsadgsagsagsay1wsWBozPZMrprln9</span>
+
+<span class="p">[</span><span class="n">user2</span><span class="p">]</span>
+<span class="n">aws_access_key_id</span> <span class="o">=</span> <span class="n">AFSSGASXKCN3LHMHZYZ</span>
+<span class="n">aws_secret_access_key</span> <span class="o">=</span> <span class="n">gsauyCrEfVC4JP7LpdhdhdshhdsvQgawI88BsUgsaasfyMOajaE</span>
+</code></pre></div></div>
+
+<p><strong>Step 4</strong>. Finally to switch over the profiles you can use the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">AWS_PROFILE</span><span class="o">=</span>user1
+</code></pre></div></div>
+<p>To switch your second user use the same command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">AWS_PROFILE</span><span class="o">=</span>user2
+</code></pre></div></div>
+<p>Before making any actions on your AWS profile you need to make sure which profile you are currently using by running:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$AWS_PROFILE</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">Output</code>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user2
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this tutorial we learned how to install and use AWS CLI, and how to switch over your AWS profiles. For more details on how to use <code class="language-plaintext highlighter-rouge">AWS CLI</code> you can find at <a href="https://aws.amazon.com/cli/">AWS CLI Documentation</a>.</p>
+:ET

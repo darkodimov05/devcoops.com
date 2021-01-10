@@ -1,0 +1,27 @@
+I":<p>Visual Studio Code is a code editor developed by Microsoft, which is currently supported on Mac and Linux as well. It can be customized via extensions. Today we are going to integrate it with the <a href="https://shell.azure.com">Azure Cloud Shell</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Visual Studio Code</li>
+  <li>Azure account with Cloud Shell storage account</li>
+</ul>
+
+<h2 id="configuration">Configuration</h2>
+<p><strong>Step 1</strong>. Open Visual Studio Code, click on <strong>Extensions</strong>, and search for <code class="language-plaintext highlighter-rouge">Azure Account</code>.<br />
+<img src="/assets/images/screenshots/screenshot2.png" alt="VSCode Extension" /></p>
+
+<p><strong>Step 2</strong>. Once you installed the extension, go to View -&gt; Command Palette and type <code class="language-plaintext highlighter-rouge">Azure: Open Bash in Cloud Shell</code>.<br />
+<img src="/assets/images/screenshots/screenshot3.png" alt="VSCode Command Palette" /></p>
+
+<p>The terminal window will display the message:</p>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Sign</span> <span class="k">in</span> <span class="n">needed</span><span class="o">.</span>
+</code></pre></div></div>
+
+<p><strong>Step 3</strong>. Click the <strong>Sign In</strong> button located on the lower right corner. It will open a new window in the default browser that will require login to the Azure Account. Login to the Azure Portal and go back to VSCode.<br />
+<img src="/assets/images/screenshots/screenshot5.png" alt="VSCode Terminal Sign in" /></p>
+
+<p><strong>Step 4</strong>. Once again open the Command Palette from the View tab and open <code class="language-plaintext highlighter-rouge">Azure: Open Bash in Cloud Shell</code>. It should display the following:<br />
+<img src="/assets/images/screenshots/screenshot6.png" alt="VSCode Terminal AZ Cloud Shell" /></p>
+
+<p>The official repository: <a href="https://github.com/Microsoft/vscode-azure-account">https://github.com/Microsoft/vscode-azure-account</a></p>
+:ET

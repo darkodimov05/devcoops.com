@@ -1,0 +1,98 @@
+I"#<p>In the last Azure <a href="{% post_url 2019-09-27-how-to-create-azure-storage-account-using-azure-cli %}">post</a> we have discussed the different types of Azure storage accounts and created one using the Azure CLI. Next, we are going to upload, download and list blob files named <strong>Blobs</strong>.<br />
+<strong>Blobs</strong> is a REST-based object storage service that is used for storing large ammount of unstructured data, such as text, or binaries. The most common scenario for <strong>Blob Storage</strong> is serving static website using <strong>CDN</strong> (Content Delivery Network). Other examples may include:</p>
+<ul>
+  <li>Storing media files</li>
+  <li>Streaming</li>
+  <li>Storing data for analysis</li>
+  <li>Storing files for backups, disaster recovery, archiving or other purposes.</li>
+</ul>
+
+<p><strong>Blobs</strong> are comprised of many blocks, each identified by a <em>block ID</em>. There are 3 types of blobs:</p>
+<ul>
+  <li><em>block blobs</em>: Optimized for uploading larger blobs.</li>
+  <li><em>page blobs</em>: Optimized for random read and write operations. Maximum size for page blobs is 8 TB.</li>
+  <li><em>append blobs</em>: Optimized for append operations. Append blob can have arount 195 GB with up to 50000 blocks with up to 4 MB in size.</li>
+</ul>
+
+<p>More about <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs">Azure Blob types</a> and <a href="https://azure.microsoft.com/en-us/services/storage/blobs/">Azure Blob Storage</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure CLI</li>
+  <li>Azure storage account</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="configure-storage-account-credentials">Configure storage account credentials</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Before doing any operation on the storage account, we need the storage account credentials. There are several ways to provide these credentials, but the <em>easiest</em> and <em>not so secure one</em> is using <em>AZURE_STORAGE_ACCOUNT</em> and <em>AZURE_STORAGE_KEY</em> environment variables. List the storage account keys:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage account keys list <span class="nt">--account-name</span> devcoops1 <span class="nt">--resource-group</span> storage-rg <span class="nt">--output</span> table
+</code></pre></div></div>
+
+<p>The output should look like this:<br />
+<img src="/assets/images/screenshots/screenshot9.png" alt="Azure CLI storage account keys list" /></p>
+
+<p><strong>Step 3</strong>. Export the environment variables including a storage key listed in <strong>Step 2</strong>, or create a new key:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">AZURE_STORAGE_ACCOUNT</span><span class="o">=</span><span class="s2">"devcoops1"</span>
+<span class="nb">export </span><span class="nv">AZURE_STORAGE_KEY</span><span class="o">=</span><span class="s2">"&lt;insert_a_storage_key_here&gt;"</span>
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Make sure the environment variables exports are correct by running <strong>echo $AZURE_STORAGE_ACCOUNT</strong> and <strong>echo $AZURE_STORAGE_KEY</strong>.</p>
+
+<h2 id="create-a-blob-container">Create a blob container</h2>
+
+<p><strong>Step 4</strong>. Azure Blobs are always stored and grouped in containers. Think of them as folders or directories where files are stored. Create a blob container using the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage container create <span class="nt">--name</span> myfirstblobcontainer
+</code></pre></div></div>
+<p>JSON response message:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Note</strong>: If an error message pop-up: <code class="language-plaintext highlighter-rouge">Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))</code>, there are a few workarounds:</p>
+<ol>
+  <li>Add <code class="language-plaintext highlighter-rouge">0.0.0.0 localhost</code> line to the <em>hosts</em> file. Don’t forget to remove the line once you are done with the example.</li>
+  <li>Connect the Azure Cloud Shell to the Visual Studio Code using the instructions on this <a href="https://devcoops.com/add-azure-cloud-shell-to-vscode/">post</a>.</li>
+  <li>Open the Azure Cloud Shell from the Azure Portal.</li>
+</ol>
+
+<h2 id="upload-a-blob">Upload a blob</h2>
+
+<p><strong>Step 5</strong>. First, we are going to create a file before the upload to a blob. Create a sample “Hello World” file <em>index.php</em>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"&lt;?php echo "</span>Hello World<span class="se">\!</span><span class="s2">";?&gt;"</span> <span class="o">&gt;</span> index.php
+</code></pre></div></div>
+
+<p><strong>Step 6</strong>. Next, upload the file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage blob upload <span class="nt">--container-name</span> myfirstblobcontainer <span class="nt">--name</span> helloworld <span class="nt">--file</span> index.php
+</code></pre></div></div>
+
+<h2 id="list-the-blob-file">List the blob file</h2>
+
+<p><strong>Step 7</strong>. Now, we are going to confirm the file upload by listing the container:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage blob list <span class="nt">--container-name</span> myfirstblobcontainer <span class="nt">--output</span> table
+</code></pre></div></div>
+<p>Output:
+<img src="/assets/images/screenshots/screenshot10.png" alt="Azure CLI list blob container" /></p>
+
+<h2 id="download-the-blob-file">Download the blob file</h2>
+
+<p><strong>Step 8</strong>. You could also download the blob file by using the command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage blob download <span class="nt">--container-name</span> myfirstblobcontainer <span class="nt">--name</span> helloworld <span class="nt">--file</span> index.php
+</code></pre></div></div>
+
+<h2 id="cleanup">Cleanup</h2>
+
+<p>If you aren’t using the storage account anymore, you could delete the resource group anytime using the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete <span class="nt">--name</span> storage-rg
+</code></pre></div></div>
+
+<h2 id="next-steps">Next steps</h2>
+<p>Instead of using storage access key, we’ll configure a shared access signature known as SAS token.</p>
+
+<p>Official documentation: <a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli">Upload, download, and list blobs using the Azure CLI</a>.</p>
+:ET

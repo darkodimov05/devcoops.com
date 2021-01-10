@@ -1,0 +1,91 @@
+I"  <p>Besides MySQL, MariaDB is another free open source relation database under the GNU General Public License, that is often compared to MySQL. That’s because MariaDB is a fork of the MySQL RDBMS, which means it’s based on the same source code, and usually it’s used for the same purposes, as a web database.<br />
+In today’s post, i’ll continue explore the possibilities of creating a relation database using the <code class="language-plaintext highlighter-rouge">Azure SQL Database</code> service, using the Azure CLI. In the last post, i’ve explained the simplified steps on <a href="{% post_url 2019-10-18-how-to-create-azure-mysql-database-using-azure-cli %}" target="_blank">How to backup and restore an Azure SQL database using Azure CLI</a>, so if you have already seen it, it’s pretty much the same procedure under the Azure Cloud.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="create-an-azure-mariadb-database">Create an Azure MariaDB Database</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Create a resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group create <span class="nt">--name</span> <span class="s2">"mariadb-rg"</span> <span class="nt">--location</span> westeurope
+</code></pre></div></div>
+
+<p><strong>Step 3</strong>. Create a MariaDB server:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az mariadb server create <span class="nt">--name</span> <span class="s2">"devcoopsmariadbserver"</span> <span class="nt">--resource-group</span> <span class="s2">"mariadb-rg"</span> <span class="nt">--location</span> westeurope <span class="nt">--admin-user</span> <span class="s2">"devcoops"</span> <span class="nt">--admin-password</span> <span class="s2">"&lt;insert_password_here&gt;"</span> <span class="nt">--sku-name</span> <span class="s2">"B_Gen5_1"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: MariaDB server name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: resource group where the mariadb database server belongs to.</li>
+  <li><code class="language-plaintext highlighter-rouge">--location</code>: filter the result to show the connectionString only.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-user</code>: server admin username.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-password</code>: server admin password.</li>
+  <li><code class="language-plaintext highlighter-rouge">--sku-name</code>: SKU name in the following format: {pricing tier}<em>{compute generation}</em>{vCores}. More about the MariaDB <a href="https://docs.microsoft.com/en-us/azure/mariadb/concepts-pricing-tiers" target="_blank">pricing tiers</a>.</li>
+</ul>
+
+<p><strong>Step 4</strong>. Get the connection information:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az mariadb server show <span class="nt">--name</span> <span class="s2">"devcoopsmariadbserver"</span> <span class="nt">--resource-group</span> <span class="s2">"mariadb-rg"</span>
+</code></pre></div></div>
+<p>The JSON output should look for the <strong>administratorLogin</strong> and <strong>fullyQualifiedDomainName</strong> parameters. For example:<br />
+<img src="/assets/images/screenshots/screenshot32.png" alt="Azure Database MariaDB connection string" /></p>
+
+<p><strong>Note</strong>: Now that we have the connection information, we could create a database either by:</p>
+<ol>
+  <li>Connect to the server using the mysql command-line client tool, or the MySQL Workbench GUI tool and create a database:
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">CREATE DATABASE mydb;</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>Using the Azure CLI.</li>
+</ol>
+
+<p><strong>Step 5</strong>. Create a MariaDB database using Azure CLI:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az mariadb db create <span class="nt">--name</span> <span class="s2">"mydb"</span> <span class="nt">--resource-group</span> <span class="s2">"mariadb-rg"</span> <span class="nt">--server-name</span> <span class="s2">"devcoopsmariadbserver"</span> 
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: MariaDB database name.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: resource group where the database belongs to.</li>
+  <li><code class="language-plaintext highlighter-rouge">--server</code>: MariaDB server name.</li>
+</ul>
+
+<p><strong>Step 6</strong>. Test the connection:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql <span class="nt">-h</span> devcoopsmariadbserver.mariadb.database.azure.com <span class="nt">-u</span> devcoops@devcoopsmariadbserver <span class="nt">-p</span> 
+</code></pre></div></div>
+
+<h2 id="cleanup">Cleanup</h2>
+<p><strong>Step 7</strong>. Delete the MariaDB database:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az mariadb db delete <span class="nt">--name</span> <span class="s2">"mydb"</span> <span class="nt">--resource-group</span> <span class="s2">"mariadb-rg"</span> <span class="nt">--server-name</span> <span class="s2">"devcoopsmariadbserver"</span>
+</code></pre></div></div>
+
+<p><strong>Step 8</strong>. Delete the MariaDB server:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az mariadb server delete <span class="nt">--name</span> <span class="s2">"mydb"</span> <span class="nt">--resource-group</span> <span class="s2">"mariadb-rg"</span>
+</code></pre></div></div>
+
+<p><strong>Step 9</strong>. Delete the resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete <span class="nt">--name</span> <span class="s2">"mariadb-rg"</span>
+</code></pre></div></div>
+
+<p>More about <a href="https://docs.microsoft.com/en-us/azure/mariadb/quickstart-create-mariadb-server-database-using-azure-cli" target="_blank">Azure Database for MariaDB using Azure CLI</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>This is just a plain example, that shows how easily you can create a MariaDB server and database in no time. It can be quite useful for development. If you have trouble connecting to the MariaDB server, please check the following:</p>
+<ol>
+  <li>Configure firewall rules using the command:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az mariadb server firewall-rule create  <span class="nt">--server</span> <span class="s2">"devcoopsmariadbserver"</span>  <span class="nt">--resource-group</span> <span class="s2">"maria-rg"</span> <span class="nt">--name</span> AllowMyIP <span class="nt">--start-ip-address</span> <span class="s2">"&lt;insert_start_ip_here&gt;"</span> <span class="nt">--end-ip-address</span> <span class="s2">"&lt;insert_end_ip_here&gt;"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Disable enforcing SSL (it’s enabled by default on the MariaDB server).
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az mariadb server update  <span class="nt">--name</span> <span class="s2">"devcoopsmariadbdbserver"</span> <span class="nt">--resource-group</span> <span class="s2">"mariadb-rg"</span> <span class="nt">--ssl-enforcement</span> Disabled
+</code></pre></div>    </div>
+  </li>
+  <li>Connection string typo.</li>
+</ol>
+:ET

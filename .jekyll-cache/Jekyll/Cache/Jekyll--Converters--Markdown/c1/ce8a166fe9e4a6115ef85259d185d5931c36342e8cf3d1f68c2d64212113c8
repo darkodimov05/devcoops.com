@@ -1,0 +1,41 @@
+I"�<p>As the name says, Azure Cloud Shell is a browser-accessible shell, which is used for managing Azure resources. It comes with two types of command shells <strong>Bash</strong> and <strong>PowerShell</strong>. It also gives you the flexibility to choose and switch between them. Although, it is primarily accessible from the browser, you could also <a href="/add-azure-cloud-shell-to-vscode/" target="_blank">Add Azure Cloud Shell to Visual Studio Code</a>.<br />
+In order to use the Azure Cloud Shell, you must first create a storage account. Once you’ve created it, on the first run, Azure will prompt to create an Azure File Share, so the data will persist between sessions. This could be quite helpful sometimes, for example when you need to upload files to work with them later.<br />
+There are currently two available methods to do this, using the Cloud Shell itself, or the Azure Portal.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure storage account</li>
+</ul>
+
+<h2 id="upload-using-azure-portal">Upload using Azure Portal</h2>
+<p><strong>Step 1</strong>. Login to the Azure Portal, and type <em>storage accounts</em> in the search textbox.<br />
+<img src="/assets/images/screenshots/screenshot49.png" alt="Search textbox" /></p>
+
+<p><strong>Step 2</strong>. Click on the Cloud Shell Storage account.<br />
+<img src="/assets/images/screenshots/screenshot50.png" alt="Cloud Shell storage account" /><br />
+Note: If you have multiple storage accounts, the Cloud Shell storage account should be located under <strong>cloud-shell-storage-region</strong> <em>Resource group</em>.</p>
+
+<p><strong>Step 3</strong>. The Cloud Shell is using the Azure File Storage, so click on the <strong>File shares</strong>.<br />
+<img src="/assets/images/screenshots/screenshot51.png" alt="Azure File shares" /></p>
+
+<p><strong>Step 4</strong>. Open the File share.<br />
+<img src="/assets/images/screenshots/screenshot52.png" alt="Cloud Shell file share" /></p>
+
+<p><strong>Step 5</strong>. Open the <strong>.cloudconsole</strong> folder and click <em>Upload</em>.<br />
+<img src="/assets/images/screenshots/screenshot53.png" alt="Cloud Shell upload" /></p>
+
+<p><strong>Step 6</strong>. It’ll display a side panel on the right side. Choose a file to upload, and click <strong>Upload</strong>.<br />
+<img src="/assets/images/screenshots/screenshot54.png" alt="Cloud Shell upload panel" /></p>
+
+<h2 id="upload-using-cloud-shell">Upload using Cloud Shell</h2>
+<p><strong>Step 7</strong>. Login to the Azure Portal, and click on the <strong>Cloud Shell</strong> icon.<br />
+<img src="/assets/images/screenshots/screenshot55.png" alt="Cloud Shell icon" /></p>
+
+<p><strong>Step 8</strong>. Click on the <em>Upload/Download files</em> button, and click Upload.<br />
+<img src="/assets/images/screenshots/screenshot56.png" alt="Cloud Shell upload/download" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Persisting files in Azure Cloud Shell is a good practice, especially if you are switching between hosts and don’t want to copy or move local files everytime you need them.<br />
+More about <a href="https://docs.microsoft.com/en-us/azure/cloud-shell/persisting-shell-storage" target="_blank">Persist files in Azure Cloud Shell</a>.</p>
+:ET

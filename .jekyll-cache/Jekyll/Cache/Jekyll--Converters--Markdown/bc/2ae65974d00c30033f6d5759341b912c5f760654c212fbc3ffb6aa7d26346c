@@ -1,0 +1,60 @@
+I"�<p>An Azure storage account is used to store all of your Azure data objects. For example: blobs, files, disks, tables, and queues. Even though the storage account is publicly accessible over HTTP or HTTPS using endpoints, it is securable, highly available, durable and scalable.</p>
+
+<h2 id="types-of-storage-accounts">Types of storage accounts</h2>
+<p>There are different types of storage accounts with different features, pricing models which surves different purposes. It always depends on what kind of scenario we are building when choosing the storage account types. There are currently 5 types of storage accounts:</p>
+<ul>
+  <li><em>General-purpose v2 accounts</em>: This is the default storage account and it’s recommended for most scenarios.</li>
+  <li><em>General-purpose v1 accounts</em>: The legacy version of the general-purpose v2 accounts.</li>
+  <li><em>Block blob storage accounts</em>: As the name says, it’s used only for blobs with premium performance, where low storage latency and high transactions rates are required.</li>
+  <li><em>FileStorage storage accounts</em>: It’s the same as the <strong>block blob storage accounts</strong> regarding performance, except it’s for files-only instead of blobs.</li>
+  <li><em>Blob storage accounts</em>: The non-premium standard version of the <strong>block blob storage accounts</strong>. It’s preferred to use the general-purpose v2 accounts over this one.</li>
+</ul>
+
+<p>More about <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview">Azure storage accounts</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure CLI</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="configuration">Configuration</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Before we create a storage account we need to create a resource group.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group create <span class="nt">--name</span> storage-rg <span class="nt">--location</span> westeurope
+</code></pre></div></div>
+<p>The json output should look like the following:<br />
+<img src="/assets/images/screenshots/screenshot8.png" alt="Create resource groups using Azure CLI" /><br />
+We could also confirm the resource group by using the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group list <span class="nt">--query</span> <span class="s2">"[?location=='westeurope']"</span>
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Before we create the storage account, we could also replace location for the resource group by choosing another location available for the azure account. To list all available locations run the command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az account list-locations <span class="nt">--output</span> table
+</code></pre></div></div>
+
+<p><strong>Step 3</strong>. Create the storage account:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage account create <span class="nt">--name</span> devcoopsstorage1 <span class="nt">--resource-group</span> storage-rg <span class="nt">--location</span> westeurope <span class="nt">--sku</span> Standard_RAGRS <span class="nt">--kind</span> StorageV2
+</code></pre></div></div>
+<p>The parameters are pretty much self-explanatory, except for the <em>sku</em> parameter which can have one of the following values:<br />
+Standard_LRS, Standard_ZRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS.<br />
+These values represent the different replication options. See more about <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-redundancy">Storage replication options</a>.</p>
+
+<p>Once the command runs successfully, the terminal will generate a lot of json output. We could also confirm the storage account by using the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage account list <span class="nt">--resource-group</span> storage-rg
+</code></pre></div></div>
+
+<h2 id="cleanup">Cleanup</h2>
+
+<p>If we aren’t using the storage account anymore, we can delete the resource group using the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete <span class="nt">--name</span> storage-rg
+</code></pre></div></div>
+
+<p>Official documentation: <a href="https://docs.microsoft.com/en-us/azure/storage/common/storage-quickstart-create-account">Create a storage account</a>.</p>
+:ET

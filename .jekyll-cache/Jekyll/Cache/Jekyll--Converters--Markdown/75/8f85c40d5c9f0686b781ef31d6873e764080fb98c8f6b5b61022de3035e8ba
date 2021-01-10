@@ -1,0 +1,4 @@
+I"†<p>As the name says, Azure Cloud Shell is a browser-accessible shell, which is used for managing Azure resources. It comes with two types of command shells <strong>Bash</strong> and <strong>PowerShell</strong>. It also gives you the flexibility to choose and switch between them. Although, it is primarily accessible from the browser, you could also <a href="/add-azure-cloud-shell-to-vscode/" target="_blank">Add Azure Cloud Shell to Visual Studio Code</a>.<br />
+In order to use the Azure Cloud Shell, you must first create a storage account. Once youâ€™ve created it, on the first run, Azure will prompt to create an Azure File Share, so the data will persist between sessions. This could be quite helpful sometimes, for example when you need to upload files to work with them later.<br />
+There are currently two available methods to do this, using the Cloud Shell itself, or the Azure Portal.</p>
+:ET

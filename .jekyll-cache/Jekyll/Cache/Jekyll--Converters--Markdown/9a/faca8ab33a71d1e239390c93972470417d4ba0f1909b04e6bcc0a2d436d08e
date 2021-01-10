@@ -1,0 +1,7 @@
+I"ø<p><strong>Azure Key Vault</strong> is centralized Azure cloud service that securely stores secrets. A secret can be a password, API, or even certificates. Besides Secrets Management, Azure Key Vault can be used as a Key Management solution which simplifies creation and control of encryption keys used to encrypt data. It can also be used as Certificate Management for provisioning, managing and deploying SSL/TLS certificates, or even provides storing secrets protected by Hardware Security Modules. There are many reasons to use key management solutions, especially working as a DevOps engineer could help you protect secrets that are used in an automation scenario, for example CI/CD pipelines.<br />
+There are two important terms:</p>
+<ul>
+  <li><strong>Vault owner</strong>: A vault owner have full access and control over the key vault.</li>
+  <li><strong>Vault consumer</strong>: A vault consumer can perform actions inside the key vault based on the given permissions granted by the vault owner.</li>
+</ul>
+:ET

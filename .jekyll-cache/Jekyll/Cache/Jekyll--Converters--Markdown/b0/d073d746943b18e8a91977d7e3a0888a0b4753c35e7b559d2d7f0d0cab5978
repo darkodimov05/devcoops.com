@@ -1,0 +1,53 @@
+I"�<p>As a part of the <a href="https://devcoops.com/categories#azure">Azure</a> series, today we are going to generate SAS token for the Azure storage containers using the azure CLI. It’s pretty much the same steps as generating SAS token for a blob, but instead of using the <a href="https://docs.microsoft.com/en-us/cli/azure/storage/blob?view=azure-cli-latest#az-storage-blob-generate-sas"><em>azure storage blob generate-sas</em></a>, we are going to use <a href="https://docs.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-generate-sas"><em>azure storage container generate-sas</em></a>.</p>
+
+<p>Please see <a href="/generate-sas-token-for-blobs-in-azure-storage-using-azure-cli/">Generate SAS token for blobs in Azure storage using Azure CLI</a> in case you want to see how to generate sas token for blobs in more details.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure CLI</li>
+  <li>Azure Storage account</li>
+</ul>
+
+<h2 id="create-a-user-delegation-sas-for-a-blob">Create a user delegation SAS for a blob</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Run the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage container generate-sas <span class="nt">--account-name</span> devcoopsstorage1 <span class="nt">--name</span> myfirstblobcontainer <span class="nt">--permissions</span> acdlrw <span class="nt">--expiry</span> 2019-10-03
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--account-name</code>: name of the storage account.</li>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: name of the storage container.</li>
+  <li><code class="language-plaintext highlighter-rouge">--permissions</code>:
+    <ul>
+      <li>a = Add</li>
+      <li>c = Create</li>
+      <li>d = Delete</li>
+      <li>l = List</li>
+      <li>r = Read</li>
+      <li>w = Write</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">--expiry</code>: datetime (Y-m-d’T’H:M’Z’) at which SAS becomes invalid.</li>
+</ul>
+
+<p>It will return SAS token:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"se=2019-10-03&amp;sp=racwdl&amp;sv=2018-11-09&amp;sr=c&amp;sig=MLOqEjIYDtltmvVQwa/sWDub8B6h8i1A4SGxqlyW8pM%3D"
+</code></pre></div></div>
+
+<p><strong>Note</strong>: SAS token is a string that you generate on the client side. You can create unlimited number of tokens, which also are not tracked by Azure Storage in any way.</p>
+
+<h2 id="revoke-a-user-delegation-sas">Revoke a user delegation SAS</h2>
+
+<p><strong>Step 4</strong>. Run the following command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az storage account revoke-delegation-keys <span class="nt">--name</span> devcoopsstorage1 <span class="nt">--resource-group</span> storage-rg
+</code></pre></div></div>
+
+<p><strong>Note</strong>: Azure Storage cache the user delegation key, so there could be a delay window between the initiation of the revocation process and the invalidation of the <strong>user delegation SAS</strong>.</p>
+
+<p>Official documentation: <a href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-cli">Create a user delegation SAS for a container or blob with the Azure CLI</a>.</p>
+:ET

@@ -1,0 +1,88 @@
+I"1!<p>Azure SQL Database is an Azure cloud managed service that provides relational database-as-a-service (DBaaS). In other words, you can migrate or scale on-premise SQL databases without worrying about high availability, backups, patching updates, or performance, because Azure is responsible for all of these operation tasks including the underlying infrastructure. You’ll be charged only for the database server and for each user-created databases.<br />
+There are currently three deployment models for an Azure SQL database:<br />
+<img src="/assets/images/screenshots/screenshot29.png" alt="Azure SQL Database deployment-models" /></p>
+
+<ul>
+  <li><strong>Single database</strong> – <em>Single database</em> is a fully managed database that is most commonly used for dev environment purposes, or if you need a single data source.</li>
+  <li><strong>Managed instance</strong> – <em>Managed instance</em> is a fully managed SQL Server Database Engine instance, that could be used when migrating on-premises database to the Azure.</li>
+  <li><strong>Elastic pool</strong> – <em>Elastic pool</em> is a collection of single databases that are stored on a single Azure SQL Database server and use shared resources. It represent a cost-effective solution when hosting multiple databases in the cloud.</li>
+</ul>
+
+<p>Check the official documentation <a href="https://docs.microsoft.com/en-us/azure/sql-database/" target="_blank">Azure SQL Database documentation</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+</ul>
+
+<h2 id="create-and-configure-an-azure-sql-database-server">Create and configure an Azure SQL database server</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Create a resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group create <span class="nt">--name</span> <span class="s2">"azure-sql-db-rg"</span> <span class="nt">--location</span> westeurope
+</code></pre></div></div>
+
+<p><strong>Step 3</strong>. Create a database server for the hosted database:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az sql server create <span class="nt">--name</span> <span class="s2">"devcoopsdbserver"</span> <span class="nt">--resouce-group</span> <span class="s2">"azure-sql-db-rg"</span> <span class="nt">--location</span> westeurope <span class="nt">--admin-user</span> <span class="s2">"devcoops"</span> <span class="nt">--admin-password</span> <span class="s2">"&lt;insert-admin-password&gt;"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: name of the resource group.</li>
+  <li><code class="language-plaintext highlighter-rouge">--location</code>: location of the database server.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-user</code>: name of the database admin user.</li>
+  <li><code class="language-plaintext highlighter-rouge">--admin-password</code>: password of the database admin user.</li>
+</ul>
+
+<p><strong>Step 4</strong>. Now that you have created a database server, configure firewall rule to whitelist IP addresses that can have access to the server. For example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az sql server firewall-rule create <span class="nt">--server</span> <span class="s2">"devcoopsdbserver"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-sql-db-rg"</span> <span class="nt">--name</span> <span class="s2">"WhitelistIPs"</span> <span class="nt">--start-ip-address</span> <span class="s2">"10.10.10.10"</span> <span class="nt">--end-ip-address</span> <span class="s2">"10.10.10.255"</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--server</code>: name of the database server.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: name of the resource group.</li>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: name of the firewall rule.</li>
+  <li><code class="language-plaintext highlighter-rouge">--start-ip-address</code>: start of the ip address range to allow access to the database server.</li>
+  <li><code class="language-plaintext highlighter-rouge">--end-ip-address</code>: end of the ip address range to allow access to the database server.</li>
+</ul>
+
+<p><strong>Note</strong>: Computers that have IP addresses in the following range from 10.10.10.10 to 10.10.10.255 are allowed to access the database server.</p>
+
+<h2 id="create-an-azure-sql-database">Create an Azure SQL database</h2>
+<p><strong>Step 5</strong>. Create an Azure SQL database:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az sql db create <span class="nt">--server</span> <span class="s2">"devcoopsdbserver"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-sql-db-rg"</span> <span class="nt">--name</span> <span class="s2">"myfirstazuresqldb"</span> <span class="nt">--edition</span> <span class="s2">"GeneralPurpose"</span> <span class="nt">--family</span> <span class="s2">"Gen4"</span> <span class="nt">--capacity</span> 1 <span class="nt">--zone-redundant</span> <span class="nb">false</span>
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--server</code>: name of the database server.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: name of the resource group.</li>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: name of the database.</li>
+  <li><code class="language-plaintext highlighter-rouge">--edition</code>: edition of the SKU.</li>
+  <li><code class="language-plaintext highlighter-rouge">--family</code>: the compute generation of the SKU: Gen4 or Gen5.</li>
+  <li><code class="language-plaintext highlighter-rouge">--capacity</code>: number of vcores.</li>
+  <li><code class="language-plaintext highlighter-rouge">--zone-redundant</code>: enable or disable replication of your data across zones in a single region.</li>
+</ul>
+
+<p><strong>Note</strong>: Once you have created the database, you can check the resources created in the Azure Portal, by clicking on the “azure-sql-db-rg” resource in the <em>Resource groups</em> tab. It should look something like this:<br />
+ <img src="/assets/images/screenshots/screenshot30.png" alt="Azure SQL Database resource-group" /></p>
+
+<h2 id="cleaning-up">Cleaning up</h2>
+<p><strong>Step 6</strong>. Delete the Azure SQL database:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az sql db delete <span class="nt">--name</span> <span class="s2">"devcoopsazuresqldb"</span> <span class="nt">--server</span> <span class="s2">"devcoopsdbserver"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-sql-db-rg"</span>
+</code></pre></div></div>
+
+<p><strong>Step 7</strong>. Delete the database server:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az sql server delete <span class="nt">--name</span> <span class="s2">"devcoopsdbserver"</span> <span class="nt">--resource-group</span> <span class="s2">"azure-sql-db-rg"</span>
+</code></pre></div></div>
+
+<p><strong>Step 8</strong>. Delete the resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete <span class="nt">--name</span> <span class="s2">"azure-sql-db-rg"</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>If you are already using Azure ecosystem, migrating your on-premises SQL database to the Azure will improve the availability and performance while interacting with the other Azure services.</p>
+
+<p>In the next posts, i’ll show you additional Azure SQL database operations, like how to lost a recover admin password, rename a database, backup and restore, and how to migrate your on-premise SQL database to the Azure cloud.</p>
+:ET

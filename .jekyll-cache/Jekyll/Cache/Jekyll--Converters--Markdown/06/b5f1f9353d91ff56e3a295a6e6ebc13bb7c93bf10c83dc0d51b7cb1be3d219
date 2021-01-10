@@ -1,0 +1,4 @@
+I"<p>Azure subscriptions are used for deploying and consuming Azure resources. A single Azure account can have multiple subscriptions, but there are some limitations. You can combine multiple Azure resources into a single Azure Resource Group. These groups are managed by <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview">Azure Resource Manager</a>.<br />
+According to Microsoft, there are two <em>Subscription limits</em> tables: <strong>Subscription limits</strong> and <strong>Subscription limits - Azure Resource Manager</strong>.<br />
+You can check the tables on the following link: <a href="https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits">Azure subscription and service limits, quotas, and constraints</a>.</p>
+:ET

@@ -1,0 +1,89 @@
+I"y<p>A Content Delivery Network (CDN) is a globally distributed group of nodes / servers that work together in order to deliver content to end users. The idea behind CDN is to provide high performance and high availability, usually by distributing servers across regions that are geographically closer to the users, to minimize latency. These groups of servers are known as points of presence (POPs), and the servers that host the files are called origin servers.<br />
+Most common scenarios include using CDNs for storing cached web static content for blog sites, and media live streaming as well.</p>
+
+<h2 id="how-it-works">How it works</h2>
+<p>CDN serves content which stays in a cache defined with a time-to-live (TTL) parameter. User makes request by using URL which is basically an endpoint. The DNS will route the request to the best performing POP location, often the geographically closest edge server to the user. If the file is stored in the cache and the TTL is not expired, the edge server will return the file. But, if the file’s TTL parameter is expired, or the file has never been requested, the edge server will send a request to the origin server. The origin server will send the file back to the edge location. Now, the edge server will store the file into the cache and return it to the client.</p>
+
+<p>One of the most popular CDNs including the public cloud providers are: Cloudflare CDN, Azure CDN, AWS CloudFront, Google Cloud CDN.</p>
+
+<p>Check the official documentation <a href="https://docs.microsoft.com/en-in/azure/cdn/cdn-overview" target="_blank">What is a content delivery network on Azure?</a>.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+  <li>Azure account</li>
+  <li>Azure Storage account</li>
+</ul>
+
+<p>{% include in-article-ad.html %}</p>
+
+<h2 id="create-a-new-cdn-profile">Create a new CDN profile</h2>
+<p><strong>Step 1</strong>. Open <em>Terminal</em> and login to the Azure Portal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az login
+</code></pre></div></div>
+<p>It will open a new window using the default browser where you will be prompted for email and password.</p>
+
+<p><strong>Step 2</strong>. Create a resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group create <span class="nt">--name</span> <span class="s2">"cdn-rg"</span> <span class="nt">--location</span> westeurope
+</code></pre></div></div>
+
+<p><strong>Step 3</strong>. Create a new CDN profile:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az cdn profile create <span class="nt">--name</span> <span class="s2">"cdnprofile"</span> <span class="nt">--resource-group</span> <span class="s2">"cdn-rg"</span> <span class="nt">--location</span> westeurope <span class="nt">--sku</span> Standard_Microsoft
+</code></pre></div></div>
+<p>Parameters:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>: name of the CDN profile.</li>
+  <li><code class="language-plaintext highlighter-rouge">--resource-group</code>: name of the resource group.</li>
+  <li><code class="language-plaintext highlighter-rouge">--location</code>: location of the CDN profile.</li>
+  <li><code class="language-plaintext highlighter-rouge">--sku</code>: the pricing tier.</li>
+</ul>
+
+<p>Output:<br />
+<img src="/assets/images/screenshots/screenshot20.png" alt="Azure CDN create profile result" /></p>
+
+<p><strong>Step 4</strong>. You can list the CDN profiles:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az cdn profile list <span class="nt">--resource-group</span> <span class="s2">"cdn-rg"</span>
+</code></pre></div></div>
+<p>It should output the same result from <strong>Step 3</strong>, if you don’t have any other CDN profiles.</p>
+
+<p><strong>Step 5</strong>. You can also get a CDN profile with a specified profile name:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az cdn profile show <span class="nt">--name</span> <span class="s2">"cdnprofile"</span> <span class="nt">--resource-group</span> <span class="s2">"cdn-rg"</span>
+</code></pre></div></div>
+<p>It should output the same result from <strong>Step 3</strong>, if you don’t have any other CDN profiles.</p>
+
+<h2 id="create-a-new-cdn-endpoint">Create a new CDN endpoint</h2>
+<p><strong>Step 6</strong>. Now that you have a CDN profile, create a CDN endpoint:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az cdn endpoint create <span class="nt">--name</span> <span class="s2">"cdnendpoint1"</span> <span class="nt">--resource-group</span> <span class="s2">"cdn-rg"</span> <span class="nt">--profile-name</span> <span class="s2">"cdnprofile"</span> <span class="nt">--origin</span> www.example.com
+</code></pre></div></div>
+<p>If you want to create a CDN endpoint with only HTTPS, just pass the <code class="language-plaintext highlighter-rouge">--no-http</code> parameter.</p>
+
+<p><strong>Step 7</strong>. You can also list or get a CDN endpoint with the following commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az cdn endpoint list <span class="nt">--profile-name</span> <span class="s2">"cdnprofile"</span> <span class="nt">--resource-group</span> <span class="s2">"managed-disks-rg"</span>
+az cdn endpoint show <span class="nt">--name</span> <span class="s2">"cdnendpoint1"</span> <span class="nt">--resource-group</span> <span class="s2">"cdn-rg"</span> <span class="nt">--profile-name</span> <span class="s2">"cdnprofile"</span>
+</code></pre></div></div>
+<p>It should output the same result from <strong>Step 5</strong>, if you don’t have any other CDN endpoints.</p>
+
+<h2 id="cleaning-up">Cleaning up</h2>
+
+<p><strong>Step 8</strong>. Delete the CDN endpoint:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az cdn endpoint delete <span class="nt">--name</span> <span class="s2">"cdnendpoint1"</span> <span class="nt">--resource-group</span> <span class="s2">"cdn-rg"</span> <span class="nt">--profile-name</span> <span class="s2">"cdnprofile"</span>
+</code></pre></div></div>
+
+<p><strong>Step 9</strong>. Delete the CDN profile:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az cdn profile delete <span class="nt">--name</span> <span class="s2">"cdnprofile"</span> <span class="nt">--resouce-group</span> <span class="s2">"cdn-rg"</span>
+</code></pre></div></div>
+
+<p><strong>Step 10</strong>. Delete the resource group:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>az group delete <span class="nt">--name</span> <span class="s2">"cdn-rg"</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>There are some benefits of using a CDN for your website, which includes:</p>
+<ul>
+  <li>Better performance</li>
+  <li>Scalable during heavy traffic</li>
+  <li>Minimize risk of traffic spikes</li>
+  <li>Save on infrastructure cost</li>
+  <li>Cached dynamic content</li>
+  <li>Act as a reverse proxy</li>
+</ul>
+:ET
