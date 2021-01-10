@@ -1,2 +1,0 @@
-I"æ<p>Accidental deletion of files can happen to anyone working either on-premise or in the cloud. As a DevOps engineer who is responsible for managing access permissions to resources, the principle of least privilege is a must, which means limiting people and services access to bare minimum so they can perform their work. But, sometimes even if we want to protect the files as much as possible, a human error could happen. Thatâ€™s where <strong>Soft delete</strong> can be useful.</p>
-:ET

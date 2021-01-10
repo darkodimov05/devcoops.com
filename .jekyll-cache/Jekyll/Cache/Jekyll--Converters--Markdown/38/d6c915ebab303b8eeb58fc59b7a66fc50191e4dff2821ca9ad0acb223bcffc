@@ -1,9 +1,0 @@
-I"<p>In the last Azure <a href="/how-to-create-azure-storage-account-using-azure-cli/">post</a> we have discussed the different types of Azure storage accounts and created one using the Azure CLI. Next, we are going to upload, download and list blob files named <strong>Blobs</strong>.<br />
-<strong>Blobs</strong> is a REST-based object storage service that is used for storing large ammount of unstructured data, such as text, or binaries. The most common scenario for <strong>Blob Storage</strong> is serving static website using <strong>CDN</strong> (Content Delivery Network). Other examples may include:</p>
-<ul>
-  <li>Storing media files</li>
-  <li>Streaming</li>
-  <li>Storing data for analysis</li>
-  <li>Storing files for backups, disaster recovery, archiving or other purposes.</li>
-</ul>
-:ET

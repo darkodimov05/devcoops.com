@@ -1,2 +1,0 @@
-I""<p>Azure App Service Domains let you buy and manage top-level domains directly from the Azure Portal. These domains will be hosted on the Azure DNS Service, that you can easily map to your existing Web Apps or Virtual Machines. Azure DNS provides certain advantages like performance and security within the Microsoft Azure ecosystem. I have already talked about creating custom public DNS zones in the last <a href="/how-to-create-and-manage-public-azure-dns-using-azure-cli/" target="_blank">post</a>, so if you got the time please read it.</p>
-:ET

@@ -1,3 +1,0 @@
-I"´<p>Snapshot is a popular term in the virtual storage world. Snapshots are a full, point-in-time copies of a system, mostly virtual machines disks, known as VHDs. We could use snapshots to restore a virtual machine to a stable state, for example if we broke something and we want to do a rollback, or even create a new copy of the VM in another availability zone in the cloud, by creating an image first. <br />
-Managing snapshots in the Azure could be done by using the Portal, the PowerShell cmdlet, or the Azure CLI. Today, iâ€™ll write about how to create quick snapshots of an Azure Virtual Machine disk, using the <code class="language-plaintext highlighter-rouge">Azure CLI</code>.</p>
-:ET

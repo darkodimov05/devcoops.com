@@ -1,4 +1,0 @@
-I"?<p>In the previous posts, i’ve covered the creation of MySQL and MariaDB using the <code class="language-plaintext highlighter-rouge">Azure Database</code> service. Today, i’ll write about PostgreSQL, the last one Azure’s Database service to offer.<br />
-PostgreSQL is a free and open-source relational database management system. It’s a general-purpose RDBMS, designed to be extensible, and got advanced features like the other enterprise database management systems.<br />
-The PostgreSQL database creation procedure is almost the same as the MySQL and MariaDB.</p>
-:ET

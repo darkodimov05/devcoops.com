@@ -1,3 +1,0 @@
-I"�<p>Managing Azure Virtual Machines through the Portal could be pretty straighforward. But, it requires multiple steps using the GUI. For example, you’ll have to login to the Portal first, then go to the <code class="language-plaintext highlighter-rouge">Azure Virtual Machines</code> service, select the VMs, and then you can start, stop, restart, or even delete the virtual machines. There is also a quicker way to do these operations, especially if you are the SysOps / DevOps guy.<br />
-Although, there are three other ways to manage Azure VMs, including PowerShell cmdlets, ARM templates, and the Azure CLI, today i’ll focus on the CLI.</p>
-:ET

@@ -1,2 +1,0 @@
-I"�<p>In the last <a href="/how-to-quickly-create-a-backup-of-an-azure-vm-using-the-azure-cli/" target="_blank">post</a>, i was talking about taking Azure Virtual Machines disk snapshots, and why it’s not a good idea to replace backups with snapshots. For today’s post, i’ll write about how to easily and quickly take backups from the <code class="language-plaintext highlighter-rouge">Azure Backup</code> service, using the Azure CLI.</p>
-:ET

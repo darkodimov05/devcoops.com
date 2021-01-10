@@ -1,4 +1,0 @@
-I"€<p>Azure SQL Database is an Azure cloud managed service that provides relational database-as-a-service (DBaaS). In other words, you can migrate or scale on-premise SQL databases without worrying about high availability, backups, patching updates, or performance, because Azure is responsible for all of these operation tasks including the underlying infrastructure. Youâ€™ll be charged only for the database server and for each user-created databases.<br />
-There are currently three deployment models for an Azure SQL database:<br />
-<img src="/assets/images/screenshots/screenshot29.png" alt="Azure SQL Database deployment-models" /></p>
-:ET
