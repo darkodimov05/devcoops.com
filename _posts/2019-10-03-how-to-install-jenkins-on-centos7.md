@@ -3,7 +3,7 @@ layout: post
 title:  "How to install Jenkins on Centos 7"
 categories: [ Centos 7 ]
 image: assets/images/jenk.jpg
-tags: [jenkins, cloud, pipelines, centos7, continuous integration, featured]
+tags: [ jenkins, cloud, pipelines, centos7, continuous integration ]
 ---
 Jenkins is an open-source tool a continuous integration and continuous delivery tool written in Java. Basically it will build, test and deploy your software projects.
 

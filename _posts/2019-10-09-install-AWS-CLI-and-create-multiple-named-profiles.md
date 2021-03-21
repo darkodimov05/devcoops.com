@@ -3,7 +3,7 @@ layout: post
 title:  "How to install AWS CLI and setup multiple named profiles on Ubuntu"
 categories: [ aws ]
 image: assets/images/awscli.jpg
-tags: [aws, cloud, aws services, linux, featured]
+tags: [ aws, cloud, aws services, linux ]
 ---
 The AWS CLI is an Amazon Command Line Interface that communicates with the AWS API and allows you to manage your AWS services from a terminal session from your local machine. The AWS CLI is a powerfull tool because it enables developers and devops engineers to have a full control over their Amazon public cloud services by typing commands on a specified line. With AWS CLI you can do everything that is also possible with the AWS Management Console. For an example you can make efficient file transfers to and from Amazon S3 -> [how to copy from AWS S3 bucket to Azure Blob Storage](https://jenkins.io/doc/). In this tutorial we will guide you through the installing process of AWS CLI and we will see how you can create a multiple named profiles and switch over them.
 

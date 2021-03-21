@@ -3,7 +3,7 @@ layout: post
 title:  "How to Direct-Upload to Azure Managed Disks"
 categories: [ azure ]
 image: assets/images/azure-direct-upload.jpg
-tags: [ azure, azure-cli, featured ]
+tags: [ azure, azure-cli ]
 ---
 A few days ago, Microsoft announced the preview of direct-upload to Azure Managed Disks. So, there are two ways you could move a VHD to the Azure cloud as a managed disk:
 1. Upload the VHD in a storage account, and then convert it into a managed disk.
