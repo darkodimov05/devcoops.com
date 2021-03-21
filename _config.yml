@@ -5,7 +5,6 @@ logo: 'assets/images/logo.png'
 favicon: 'assets/images/favicon.ico'
 baseurl: ''
 email: 'devcoopscom@gmail.com'
-mailchimp-list: ''
 google_analytics: UA-148517499-1
 
 # Disqus
@@ -49,8 +48,6 @@ highlighter: rouge
 
 # Paginate
 paginate: 10
-
-
 
 # Exclude metadata and development time dependencies (like Grunt plugins)
 exclude: [README.markdown, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules]

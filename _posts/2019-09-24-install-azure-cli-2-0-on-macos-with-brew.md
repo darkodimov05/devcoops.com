@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Install Azure CLI 2.0 on macOS with brew"
-categories: [ azure, macos ]
+categories: [ azure ]
 image: assets/images/azure-cli-macos-brew.png
-tags: [azure, azure-cli, macos, homebrew]
+tags: [ azure, azure-cli, macos ]
 ---
 The `Azure CLI` is a command-line tool that let you manage the Azure resources from your local terminal. Using the terminal can bring a lot of advantages, like being more efficient and automating tasks with scripts. We will easily install this tool using the [homebrew package manager](https://brew.sh).  
 
