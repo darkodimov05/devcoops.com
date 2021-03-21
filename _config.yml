@@ -26,7 +26,6 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   
-
 # Defaults
 defaults:
 
