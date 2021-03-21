@@ -12,8 +12,6 @@ Although, there are three other ways to manage Azure VMs, including PowerShell c
 * Azure account
 * Azure VMs
 
-{% include in-article-ad.html %}
-
 ## List Azure VM using the CLI
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

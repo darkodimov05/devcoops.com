@@ -11,8 +11,6 @@ As we know Nginx has a lot of great features, one of them is to redirect your we
 * Already installed [nginx web server](https://devcoops.com/how-to-install-nginx-on-ubuntu18.04/)
 * Make sure that you are logged into your Linux server as a user with `sudo` privileges
 
-{% include in-article-ad.html %}
-
 ## Redirect all to HTTPS
 The easiest and the most common method is to redirect all the 80(HTTP) requests to 443(HTTPS).
 To enable this you can copy and paste the following configuration:

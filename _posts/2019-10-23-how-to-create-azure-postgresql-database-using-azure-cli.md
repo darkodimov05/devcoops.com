@@ -12,8 +12,6 @@ The PostgreSQL database creation procedure is almost the same as the MySQL and M
 ## Prerequisites
 * Azure account
 
-{% include in-article-ad.html %}
-
 ## Create an Azure PostgreSQL Database
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

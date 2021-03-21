@@ -12,8 +12,6 @@ A very common task that i'm used to as a DevOps engineer working in the cloud, i
 * Azure account
 * Azure SQL database
 
-{% include in-article-ad.html %}
-
 ## Reset Administrator account password
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

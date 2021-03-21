@@ -18,8 +18,6 @@ Check the official documentation [Azure SQL Database documentation](https://docs
 ## Prerequisites
 * Azure account
 
-{% include in-article-ad.html %}
-
 ## Create and configure an Azure SQL database server
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

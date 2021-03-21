@@ -18,8 +18,6 @@ When we mention public cloud and devops, we often think of Amazon Web Services, 
 * AWS account
 * AWS S3 bucket
 
-{% include in-article-ad.html %}
-
 ## Download and Install azcopy
 **Step 1**. Download **azcopy** as a zip/tar from Microsoft:
 * [Windows](https://aka.ms/downloadazcopy-v10-windows)

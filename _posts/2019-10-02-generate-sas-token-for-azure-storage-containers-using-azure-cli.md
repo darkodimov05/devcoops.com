@@ -14,8 +14,6 @@ As a part of the [Azure](https://devcoops.com/categories#azure) series, today we
 * Azure CLI
 * Azure Storage account
 
-{% include in-article-ad.html %}
-
 ## Create a user delegation SAS for a blob
 **Step 1**. Open *Terminal* and login to the Azure Portal:
 ```bash

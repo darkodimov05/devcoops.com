@@ -27,8 +27,6 @@ Azure Cloud came up with a Platform-as-a-service (PaaS) this year, known as `Azu
 * Azure account
 * Azure VM
 
-{% include in-article-ad.html %}
-
 ## Create an Azure Bastion host
 **Step 1**. Open the Azure Portal and search the Marketplace for *Bastion*.
 ![Azure Bastion marketplace](/assets/images/screenshots/screenshot34.png)

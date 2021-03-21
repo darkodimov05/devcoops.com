@@ -24,8 +24,6 @@ Check the official documentation [Buy a custom domain name for Azure App Service
 * Azure account
 * Remove the spending limit on your subscription
 
-{% include in-article-ad.html %}
-
 ## Create App Service domain
 **Step 1**. Login to the Azure Portal.
 

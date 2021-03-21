@@ -19,8 +19,6 @@ Check the official documentation [What is a content delivery network on Azure?](
 * Azure account
 * Azure Storage account
 
-{% include in-article-ad.html %}
-
 ## Create a new CDN profile
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

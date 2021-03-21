@@ -19,8 +19,6 @@ ALTER DATABASE [dbname] MODIFY NAME = [newDBname]
 * Azure account
 * Azure SQL database
 
-{% include in-article-ad.html %}
-
 ## Rename an Azure SQL database
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

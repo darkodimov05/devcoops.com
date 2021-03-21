@@ -16,8 +16,6 @@ Before continuing with this tutorial you need to met the following prerequisites
 * Make sure that you are logged into your Ubuntu 19.04 machine as a user with `sudo` privileges
 * Docker installed. You can use the instructions from [How to install docker on Ubuntu 19.04](https://devcoops.com/install-docker-on-ubuntu-19.04/) 
 
-{% include in-article-ad.html %}
-
 ## Install Docker Compose 
 Docker compose can be installed From the official Ubuntu 19.04 repositories, but to make sure that you are using the latest version of Docker Compose we will install it from the Docker's GitHub repository.
 The latest verison of Docker Compose is `1.25.0` at the time of writing this article.

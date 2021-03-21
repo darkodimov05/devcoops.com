@@ -11,8 +11,6 @@ Visual Studio Code is a code editor developed by Microsoft, which is currently s
 * Visual Studio Code  
 * Azure account with Cloud Shell storage account  
 
-{% include in-article-ad.html %}
-
 ## Configuration
 **Step 1**. Open Visual Studio Code, click on **Extensions**, and search for ```Azure Account```.  
 ![VSCode Extension](/assets/images/screenshots/screenshot2.png)

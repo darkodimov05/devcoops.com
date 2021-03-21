@@ -31,8 +31,6 @@ The ELK Stack consists of four main parts:
 ## Prerequisites
 * You will have to make sure that you are logged into your Ubuntu machine as a user with `sudo` privileges
 
-{% include in-article-ad.html %}
-
 ## Installing and Configuring Elasticsearch
 
 Before we started with the installation, let's update the system:
