@@ -50,6 +50,8 @@ docker-compose up -d --no-deps <service_name>
 3. docker-compose up -d
 ```
 
+Official docker-compose [commandline documentation](https://docs.docker.com/engine/reference/commandline/compose/).
+
 ## Docker
 ### Run alpine docker container in a detached mode
 ```bash
@@ -123,5 +125,7 @@ Remove all images (YOLO):
 docker rmi -f $(docker images -aq)
 ```
 
+Official docker [commandline documentation](https://docs.docker.com/engine/reference/commandline/docker/).
+
 ## Conclusion
-I'm sure there's a lot more commands to be added, so feel free to throw more in.
+I'm sure there's a lot more commands to be added, so feel free to leave a comment below.
