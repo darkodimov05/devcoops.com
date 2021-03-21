@@ -8,8 +8,6 @@ tags: [ docker, dockerhub, docker image ]
 Docker Hub is a remote repository which allows you to share docker container images with your team, customers, and the Docker community.
 Within a Dockerfile you can have all the commands that are needed to assemble an image and push that image to a Docker Hub repo.  A single Docker Hub repository can hold many Docker images stored as tags. In this tutorial, I'm going to show you how to build and push an image to Docker Hub repo.
 
-{% include autoads.html %}
-
 ## Prerequisites
 * Docker installed
 * Docker Hub account

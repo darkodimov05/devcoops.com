@@ -7,8 +7,6 @@ tags: [ docker, docker-compose ]
 ---
 Working with docker-compose in a development environment can be challenging sometimes for the newcomers, unless you got the time on your hands to google everything from stack overflow and save it somewhere locally. In this post, I'll share with you some commands that might help you from the start. The words like `services` and `containers` will be used interchangeably.
 
-{% include autoads.html %}
-
 ## Prerequisites
 * Docker  
 * Docker Compose  
