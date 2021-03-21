@@ -3,7 +3,7 @@ layout: post
 title:  "Use Git Lfs with existing Bitbucket Repository"
 categories: [ git ]
 image: assets/images/git_lfs.png
-tags: [git, bitbucket, featured]
+tags: [ git, bitbucket ]
 ---
 Git LFS is a Git extension that allows users to save space **by storing binary files** in a different location. Git LFS stands for (large file storage) and it's a method for saving space when working with binary files.
 We all know that some repositories have audio files, image files or video files which are all examples of binary files. Git does it great job by tracking changesets in test files and any changes you make to binary files are tracked as an additional copy of a file.  This means if you have an image with ```100 MB``` on your repository and if you make any change to it, git will track in new  ```100 MB``` file, which starts to add fast if you have additional changes. Furthermore, these changes get pushed to your remote repo and your remote repo starts to grow in size too. Slowing down the time it takes to clone, push, pull or perform other operations with your repo. With Git LFS your commits will point to a lightweight reference object in place of a binary file and your binaries are stored on a separate LFS server. This saves space because any time you clone this LFS repo or checkout a branch you only pull down the version of the binary file that you need from your LFS server.

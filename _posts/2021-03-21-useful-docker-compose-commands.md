@@ -15,35 +15,35 @@ Working with docker-compose in a development environment can be challenging some
 {% include autoads.html %}
 
 ## Docker Compose
-### Build and start docker-compose stack in the background
+**Build and start docker-compose stack in the background**
 ```bash
 docker-compose up --build -d
 ```  
 This command will build or rebuild services (if you have changes in a service Dockerfile or in it's build directory)in the docker-compose stack and run them in the background. This is usually useful when trying to deploy the stack for the first time. `-d` stands for detached mode.
 
-### Stop and remove all docker containers in the docker-compose stack
+**Stop and remove all docker containers in the docker-compose stack**
 ```bash
 docker-compose down
 ```
 This command will stop and remove all services (containers) specified in the docker-compose stack. If you want to remove the volumes and images used by any service add `-v` and `--rmi all` parameters as well.
 
-### Restart a single docker-compose service
+**Restart a single docker-compose service**
 ```bash
 docker-compose restart <service_name>
 ```
 If you ommit a service name, it will restart all the services.
 
-### Start docker-compose stack with a scaled up service
+**Start docker-compose stack with a scaled up service**
 ```bash
 docker-compose up -d --scale <service_name>=5
 ```
 
-### Update containers that have newer image than currently running
+**Update containers that have newer image than currently running**
 ```bash
 docker-compose up -d --no-deps <service_name>
 ```
 
-### Get docker-compose to pull the latest images from repositories
+**Get docker-compose to pull the latest images from repositories**
 ```
 1. docker-compose down
 2. docker-compose pull (for remote repositories) and/or docker-compose build --pull (for local build images)
@@ -53,12 +53,12 @@ docker-compose up -d --no-deps <service_name>
 Official docker-compose [commandline documentation](https://docs.docker.com/engine/reference/commandline/compose/).
 
 ## Docker
-### Run alpine docker container in a detached mode
+**Run alpine docker container in a detached mode**
 ```bash
 docker run -dit --name test-container alpine
 ```
 
-### Get into the docker container shell
+**Get into the docker container shell**
 ```bash
 docker exec -it <container_name_or_id> /bin/bash
 ```
@@ -69,12 +69,12 @@ Parameters:
  * `-i`: keeps stdin open even if it's not attached
  * `-t`: allocate a pseudo-tty
 
-### Get info about the docker image or container
+**Get info about the docker image or container**
 ```bash
 docker inspect <image_name_or_container_name>
 ```
 
-### Show docker container logs
+**Show docker container logs**
 ```bash
 docker logs <container_name_or_id>
 ```
@@ -89,12 +89,12 @@ If you want to display only the latest lines:
 docker logs --tail 100 <container_name_or_id>
 ```
 
-### Get docker container IP address
+**Get docker container IP address**
 ```bash
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name_or_id>
 ```
 
-### Clean out docker images, builds, volumes, containers, ...
+**Clean out docker images, builds, volumes, containers, ...**
 ```bash
 docker system prune --volumes
 ```
