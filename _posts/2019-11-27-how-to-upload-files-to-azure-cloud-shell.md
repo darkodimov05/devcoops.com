@@ -13,8 +13,6 @@ There are currently two available methods to do this, using the Cloud Shell itse
 * Azure account
 * Azure storage account
 
-{% include in-article-ad.html %}
-
 ## Upload using Azure Portal
 **Step 1**. Login to the Azure Portal, and type *storage accounts* in the search textbox.  
 ![Search textbox](/assets/images/screenshots/screenshot49.png)

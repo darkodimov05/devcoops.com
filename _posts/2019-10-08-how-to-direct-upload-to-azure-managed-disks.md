@@ -20,8 +20,6 @@ Check the official blog [Introducing the preview of direct-upload to Azure manag
 * Azure account
 * Azure Storage account
 
-{% include in-article-ad.html %}
-
 ## Create an Azure Managed Disk
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

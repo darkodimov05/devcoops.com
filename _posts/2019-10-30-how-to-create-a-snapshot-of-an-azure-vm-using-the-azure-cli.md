@@ -12,8 +12,6 @@ Managing snapshots in the Azure could be done by using the Portal, the PowerShel
 * Azure account
 * Azure VM
 
-{% include in-article-ad.html %}
-
 ## Create a snapshot of an Azure VM disk
 **Step 1**. Open *Terminal* and sign in:  
 ```bash

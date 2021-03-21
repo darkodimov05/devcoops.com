@@ -13,8 +13,6 @@ Within a Dockerfile you can have all the commands that are needed to assemble an
 * Docker installed
 * Docker Hub account
 
-{% include in-article-ad.html %}
-
 ## Build and push the image
 **Step 1**. Firstly, you need to login to your Docker Hub account executing the `docker login` command in your terminal:
 ```bash

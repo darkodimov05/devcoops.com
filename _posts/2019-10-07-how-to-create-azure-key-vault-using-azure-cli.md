@@ -15,8 +15,6 @@ Official documentation [Azure Key Vault documentation](https://docs.microsoft.co
 ## Prerequisites
 * Azure account
 
-{% include in-article-ad.html %}
-
 ## Create a Key Vault
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

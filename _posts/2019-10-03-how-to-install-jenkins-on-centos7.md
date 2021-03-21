@@ -14,8 +14,6 @@ In this tutorial, we will walk you through the steps of installing Jenkins on a 
 ## Prerequisites
 To continue with this tutorial, make sure that you are logged in as a user with `sudo` privileges.
 
-{% include in-article-ad.html %}
-
 ## Installing Jenkins
 You can start with the installation on your CentOS system by following the steps:
 

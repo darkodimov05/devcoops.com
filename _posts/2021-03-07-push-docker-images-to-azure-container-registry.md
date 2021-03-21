@@ -12,8 +12,6 @@ Azure Container Registry is a private container registry where you can upload an
 * Azure account  
 * Azure CLI  
 
-{% include in-article-ad.html %}
-
 ## Create an Azure Container Registry
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

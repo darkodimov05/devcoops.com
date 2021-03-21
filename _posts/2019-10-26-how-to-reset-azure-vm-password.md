@@ -16,8 +16,6 @@ There are four ways to change an Azure VM user password, including:
 * Azure account
 * Azure VM
 
-{% include in-article-ad.html %}
-
 ## Reset Azure VM password using the CLI
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

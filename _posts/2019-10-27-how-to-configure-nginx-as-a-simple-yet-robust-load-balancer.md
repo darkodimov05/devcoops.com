@@ -17,8 +17,6 @@ Providing redundancy is when one or more of our load balanced servers fail for w
 * Installed php on your machine
 * Make sure that you are logged into your Linux machine as a user with `sudo` privileges
 
-{% include in-article-ad.html %}
-
 ## Creating multiple PHP servers
 To demonstrate the usage of the `Nginx` load balancer I will create a multiple PHP servers. I will simply have them each return and identifying plain message.
 

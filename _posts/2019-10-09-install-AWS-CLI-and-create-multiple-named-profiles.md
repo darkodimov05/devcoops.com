@@ -11,8 +11,6 @@ The AWS CLI is an Amazon Command Line Interface that communicates with the AWS A
 * AWS account
 * Make sure that you are logged into your Linux machine as a user with `sudo` privileges
 
-{% include in-article-ad.html %}
-
 ## Installing AWS CLI
 **Step 1**. Before we can install the AWS CLI on our machine we have to make sure that python and pip are already installed. To make sure run the following commands:
 ```bash

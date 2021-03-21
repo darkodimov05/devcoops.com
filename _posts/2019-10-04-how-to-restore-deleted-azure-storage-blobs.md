@@ -19,8 +19,6 @@ The recoverable time is configurable with maximum of one year. It is backward co
 * Azure account
 * Azure storage account
 
-{% include in-article-ad.html %}
-
 ## Enable Soft delete feature
 **Step 1**. Login to the Azure Portal and go to the Storage account.
 

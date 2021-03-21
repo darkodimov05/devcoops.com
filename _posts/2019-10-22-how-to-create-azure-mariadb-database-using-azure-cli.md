@@ -11,8 +11,6 @@ In today's post, i'll continue explore the possibilities of creating a relation 
 ## Prerequisites
 * Azure account
 
-{% include in-article-ad.html %}
-
 ## Create an Azure MariaDB Database
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

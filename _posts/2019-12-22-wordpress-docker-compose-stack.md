@@ -14,8 +14,6 @@ Before continuing with this tutorial you need to met the following prerequisites
 * Docker installed. You can use the instructions from [How to install docker on Ubuntu 19.04](https://devcoops.com/install-docker-on-ubuntu-19.04/) 
 * Docker Compose already installed. Follow the instructions from [How to install Docker Compose on Ubuntu 19.04](https://devcoops.com/install-docker-compose-on-ubuntu-19.04/)
 
-{% include in-article-ad.html %}
-
 ## Create the environment 
 Before creating the Docker Compose file we will create a directory which will be used to deploy the application. 
 ```bash

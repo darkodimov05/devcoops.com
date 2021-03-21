@@ -10,8 +10,6 @@ Nginx was created in 2004 by a Russian developer Igor Sysoev as he was frustrate
 ## Prerequisites
 * Make sure that you are logged into your Ubuntu 18.04 machine as a user with `sudo` privileges.
 
-{% include in-article-ad.html %}
-
 ## About the C10k Problem 
 The C10k problem is the problem of optimising network sockets to handle a large number of clients at the same time. The name C10k is a numeronym for concurrently handling ten thousand connections. Note that concurrent connections are not the same as requests per second, though they are similar: handling many requests per second requires high throughput (processing them quickly), while high number of concurrent connections requires efficient scheduling of connections.
 

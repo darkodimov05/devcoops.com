@@ -35,7 +35,7 @@ defaults:
       path: "_posts"
     values:
       layout: post
-      
+      autoads: true
   # all pages
   - scope:
       path: "_pages"

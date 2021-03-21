@@ -12,8 +12,6 @@ There are a lot of reasons for moving your local files into your AWS S3 bucket. 
 * Make sure that you are logged into your Linux machine as a user with `sudo` privileges
 * Have installed [AWS CLI and learned how to switch between multiple named profiles](https://devcoops.com/install-AWS-CLI-and-create-multiple-named-profiles/)
 
-{% include in-article-ad.html %}
-
 ## Examples
 **Step 1**. If you meet all the above requirements, it's a good practise to list all your available buckets, so you should be able to find your desired S3 bucket.
 To do a simple list command run the following:

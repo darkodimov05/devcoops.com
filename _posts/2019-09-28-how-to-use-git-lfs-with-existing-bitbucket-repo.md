@@ -12,8 +12,6 @@ We all know that some repositories have audio files, image files or video files 
 * Installed git  
 * Created Bitbucket account and repository
 
-{% include in-article-ad.html %}
-
 ## Git Command Line 
 Before we started with the git lfs and cloning an existing Bitbucket repository, let's have a quick overview of the basic git command line commands.
 The most commonly used git commands are:

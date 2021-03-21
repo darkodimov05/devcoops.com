@@ -24,8 +24,6 @@ More about [Azure Blob types](https://docs.microsoft.com/en-us/rest/api/storages
 * Azure CLI
 * Azure storage account
 
-{% include in-article-ad.html %}
-
 ## Configure storage account credentials
 **Step 1**. Open *Terminal* and login to the Azure Portal:
 ```bash

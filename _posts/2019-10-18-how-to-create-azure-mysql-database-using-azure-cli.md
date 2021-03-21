@@ -11,8 +11,6 @@ In today's post, i will write about creating a MySQL database in the cloud, and 
 ## Prerequisites
 * Azure account
 
-{% include in-article-ad.html %}
-
 ## Create an Azure MySQL Database
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

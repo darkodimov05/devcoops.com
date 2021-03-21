@@ -18,8 +18,6 @@ Check the official documentation [What is Azure DNS?](https://docs.microsoft.com
 * Azure account
 * Azure Storage account
 
-{% include in-article-ad.html %}
-
 ## Create a new public DNS zone
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

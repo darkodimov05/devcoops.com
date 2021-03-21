@@ -21,8 +21,6 @@ More about [Azure storage accounts](https://docs.microsoft.com/en-us/azure/stora
 * Azure account  
 * Azure CLI  
 
-{% include in-article-ad.html %}
-
 ## Configuration
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

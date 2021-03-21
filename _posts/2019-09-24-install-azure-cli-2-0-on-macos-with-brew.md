@@ -14,8 +14,6 @@ The current version of the `Azure CLI` is **2.0.74**.
 * Python3 package  
 * Azure account  
 
-{% include in-article-ad.html %}
-
 ## Installation
 **Step 1**. Open terminal and update brew:
 {% highlight ruby %}

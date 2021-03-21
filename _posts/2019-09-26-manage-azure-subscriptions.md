@@ -14,8 +14,6 @@ You can check the tables on the following link: [Azure subscription and service 
 * Azure account  
 * Azure CLI  
 
-{% include in-article-ad.html %}
-
 ## Configuration
 **Step 1**. Open *Terminal* and list the active subscriptions:  
 ```bash

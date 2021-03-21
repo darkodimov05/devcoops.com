@@ -23,8 +23,6 @@ More about [restoring dbs from backups](https://docs.microsoft.com/en-us/azure/s
 * Azure SQL database
 * Azure Storage account
 
-{% include in-article-ad.html %}
-
 ## Backup an Azure SQL Database
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
 ```bash

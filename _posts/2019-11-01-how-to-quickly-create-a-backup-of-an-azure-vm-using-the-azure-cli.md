@@ -11,8 +11,6 @@ In the last [post]({% post_url 2019-11-01-how-to-quickly-create-a-backup-of-an-a
 * Azure account
 * Azure VM
 
-{% include in-article-ad.html %}
-
 ## Create a backup vault
 **Step 1**. Open *Terminal* and sign in:  
 ```bash

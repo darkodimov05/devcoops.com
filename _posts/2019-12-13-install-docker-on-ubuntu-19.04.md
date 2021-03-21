@@ -13,8 +13,6 @@ Docker is a form of virtualization but, unlike Virtual Machines the recourses ar
 ## Prerequisites
 * Make sure that you are logged into your Ubuntu 19.04 machine as a user with `sudo` privileges
 
-{% include in-article-ad.html %}
-
 ## Install Docker 
 First we will update the local database of software and make sure that we have access to the latest revisions. To do this open the terinal and execute:
 ```bash
