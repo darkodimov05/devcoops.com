@@ -8520,3 +8520,15 @@ div#toc ol li{
   text-align: left;
   padding: 4px;
 }
+
+#show-comments-button {
+  background-color: #e2e8f0;
+  border: none;
+  color: #03a87c;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 15px;
+  margin: 0px 0px;
+  width: 100%;
+  cursor:pointer;
+}
