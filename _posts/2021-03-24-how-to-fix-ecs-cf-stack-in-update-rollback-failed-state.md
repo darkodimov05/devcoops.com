@@ -5,8 +5,10 @@ categories: [ aws ]
 image: assets/images/aws-ecs-cf.jpg
 tags: [ aws, ecs, cloudformation ]
 ---
-
 Deploying your ECS services through CloudFormation sometimes can cause odd issues. There are a lot of reasons that can cause that. For example, if there is an application error, missing some environment variables, health checks, etc... In that situation, CloudFormation default behavior is to `rollback` the template to the previous state, but sometimes the CF stack can be stuck, and after a long time can throw `UPDATE_ROLLBACK_FAILED` state. There are a lot of tutorials that explain how to fix that by simply clicking on `Continue update rollback` next `Resources to skip` -  section and selecting the resources that you want to skip, but when it comes to ECS deployment it may not work. 
+
+## Prerequisites
+* AWS Account
 
 ## Fixing the CF stack
 **Step 1**. Open the ECS service, choose the cluster and find the service from the AWS ECS services tab
