@@ -3,7 +3,7 @@ layout: post
 title:  "How to get all the IP addresses of a group in Ansible"
 categories: [ ansible ]
 image: assets/images/ansible-ip.jpeg
-tags: [ ansible, jinja2 ]
+tags: [ ansible, jinja2, elasticsearch ]
 ---
 Usually when developing an Ansible role, most of the times we need to write a jinja2 template for some configuration file. Speaking from personal experience, I was writing an elasticsearch role and I needed to add an ```elasticsearch.yml``` jinja2 template, and I was struggling a bit, because I had to add all of the elasticsearch group nodes IP addresses into the following line:
 ```bash
