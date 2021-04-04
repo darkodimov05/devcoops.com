@@ -15,7 +15,7 @@ discovery.zen.ping.unicast.hosts: ["192.168.10.1", "192.168.10.2", "192.168.10.3
 After a little bit of googling, I found a temporary solution on [stack overflow](https://stackoverflow.com/questions/36328907/ansible-get-all-the-ip-addresses-of-a-group):   
 ```bash
 {% raw  %}
-discovery.zen.ping.unicast.hosts: [{{ elasticsearch_hosts }}]
+discovery.zen.ping.unicast.hosts: ["{{ elasticsearch_hosts }}"]
 elasticsearch_hosts: "{{ groups['elasticnodes'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | join(', ') }}"
 {% endraw  %}
 ```
