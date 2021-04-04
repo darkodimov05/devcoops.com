@@ -23,7 +23,7 @@ It will open a new window using the default browser where you will be prompted f
 
 **Step 2**. Create a resource group:  
 ```bash
-az group create --name "rg-aks-test " --location westeurope
+az group create --name "rg-aks-test" --location westeurope
 ```
 
 **Step 3**. Create a Kubernetes cluster in the resource group that we've just created:  
@@ -41,7 +41,7 @@ Parameters:
 1. Install [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/)
 2. ```az aks install-cli```  
 
-**Step 5**. Configure kubectl to connect to the Kubernetes cluster: 
+**Step 5**. Configure kubectl to connect to the Kubernetes cluster:  
 ```bash
 az aks get-credentials --resource-group "rg-aks-test" --name "aksdevcoopstest" 
 ```
