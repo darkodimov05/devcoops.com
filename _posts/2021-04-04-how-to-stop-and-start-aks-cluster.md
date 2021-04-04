@@ -52,12 +52,12 @@ Command output:
 ## Cleanup
 **Step 5**. Delete the Azure Kubernetes Cluster:  
 ```bash
-az aks delete --resource-group "rg-aks-test" --name "aksdevcoopstest" --yes --no-wait
+az aks delete --resource-group rg-aks-test --name aksdevcoopstest --yes --no-wait
 ```
 
 **Step 6**. Delete the resource group:  
 ```bash
-az group delete --name "rg-aks-test"
+az group delete --name rg-aks-test
 ```
 
 ## Conclusion
