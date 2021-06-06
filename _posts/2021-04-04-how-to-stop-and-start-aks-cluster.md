@@ -13,7 +13,6 @@ In the previous Azure [post]({% post_url 2021-03-14-how-to-create-kubernetes-clu
 * Azure CLI  
 * Azure Kubernetes Cluster
 
-{% include autoads.html %}
 
 ## Stop the AKS Cluster
 **Step 1**. Stop the cluster:    
