@@ -12,7 +12,6 @@ Azure Kubernetes Service (AKS) is a managed Kubernetes service that helps you to
 * Azure account  
 * Azure CLI  
 
-{% include autoads.html %}
 
 ## Create an Azure Kubernetes Service
 **Step 1**. Open *Terminal* and login to the Azure Portal:  
