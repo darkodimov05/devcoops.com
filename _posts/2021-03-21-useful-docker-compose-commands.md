@@ -88,8 +88,10 @@ docker logs --tail 100 <container_name_or_id>
 
 **Get docker container IP address**
 ```bash
+{% raw  %}
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_name_or_id>
 ```
+{% endraw  %}
 
 **Clean out docker images, builds, volumes, containers, ...**
 ```bash

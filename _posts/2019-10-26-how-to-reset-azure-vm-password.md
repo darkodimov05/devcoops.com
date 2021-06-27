@@ -5,7 +5,7 @@ categories: [ azure ]
 image: assets/images/azure-vm-password.jpg
 tags: [ azure, azure-cli, azure-vm ]
 ---
-Losing and resetting passwords can be quite frustrating, especially if you are working as an IT guy, who have to reset passwords every day for other employees. The same thing could happen in the cloud, especially for SysOps admins. However, there are scenarioes where you'll have to change the Azure VM administrator password periodically. I have already talked about resetting database passwords on the `Azure SQL Database` service, covered in [How to recover lost admin password for an Azure SQL Database using Azure CLI]({% post_url 2019-10-13-how-to-recover-lost-admin-password-for-azure-sql-database-using-azure-cli %}){:target="_blank"}. This time, i'll focus on how to reset passwords on the `Azure Virtual Machines` service.  
+Losing and resetting passwords can be quite frustrating, especially if you are working as an IT guy, who have to reset passwords every day for other employees. The same thing could happen in the cloud, especially for SysOps admins. However, there are scenarios where you'll have to change the Azure VM administrator password periodically. I have already talked about resetting database passwords on the `Azure SQL Database` service, covered in [How to recover lost admin password for an Azure SQL Database using Azure CLI]({% post_url 2019-10-13-how-to-recover-lost-admin-password-for-azure-sql-database-using-azure-cli %}){:target="_blank"}. This time, i'll focus on how to reset passwords on the `Azure Virtual Machines` service.  
 There are four ways to change an Azure VM user password, including:
 * Azure Portal
 * Azure CLI
