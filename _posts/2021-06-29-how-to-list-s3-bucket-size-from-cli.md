@@ -37,7 +37,7 @@ secret_key     ****************ABCD      config_file    ~/.aws/config
 
 **Step 3**. Get a summary of the S3 bucket items and size
 ```bash
- aws s3 ls --summarize --human-readable s3://bucket-name
+aws s3 ls --summarize --human-readable s3://bucket-name
 ```  
 It will list all of the bucket items including Total Objects and Total Size.
 
