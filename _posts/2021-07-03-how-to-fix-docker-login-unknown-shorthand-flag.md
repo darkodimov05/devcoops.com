@@ -16,7 +16,7 @@ See 'docker login --help'.
 * Docker
 
 ## Solution
-**Step 1**. The updated command is basically the same from the output of `aws ecr get-login` but without the -e flag. Something like:  
+**Step 1**. The updated command is basically the same as `aws ecr get-login` output, but without the -e flag. Something like:  
 ```bash
 docker login -u AWS -p <some_secret_string> https://aws_account_id.dkr.ecr.region.amazonaws.com
 ```  
@@ -31,6 +31,6 @@ Login Succeeded
 ```
 
 ## Conclusion
-The reason for seeing this error is that in 17.0.6 Docker engine update, the -e and --email flags were deprecated. Check it out for yourself [Deprecated Engine Features](https://docs.docker.com/engine/deprecated/#-e-and---email-flags-on-docker-login){:target="_blank"}.  
-AWS came up with an announcement as well back in 2017 [Announcement: Docker Email Flag Removal](https://forums.aws.amazon.com/ann.jspa?annID=4656){:target="_blank"}.   
+The reason for seeing this error is that in 17.0.6 Docker engine update, the -e and \-\-email flags were deprecated. Check it out for yourself [Deprecated Engine Features](https://docs.docker.com/engine/deprecated/#-e-and---email-flags-on-docker-login){:target="_blank"}.  
+Back in 2017 AWS came up with an announcement as well [Announcement: Docker Email Flag Removal](https://forums.aws.amazon.com/ann.jspa?annID=4656){:target="_blank"}.   
 Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
