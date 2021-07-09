@@ -3,7 +3,7 @@ layout: post
 title:  "How to list S3 bucket size from the command line"
 categories: [ aws ]
 image: assets/images/aws-s3-bucket-size.jpg
-tags: [aws, s3, cli]
+tags: [ aws, s3, cli ]
 ---
 AWS S3 as a service is pretty cheap and probably the most popular one among the rest of the cloud object storage services. S3 is most often used as a database backup storage, log storage or even serving static files.
 Although there is a way to check on how much S3 storage you are paying for from the management console, it's much more faster to do it from the command line though. Let's hope straight into it.

@@ -3,7 +3,7 @@ layout: post
 title:  "How to upload your local files to your AWS S3 bucket with AWS CLI"
 categories: [ aws ]
 image: assets/images/mybucket.jpg
-tags: [aws, cloud, aws services, linux]
+tags: [ aws, cloud, aws services, linux ]
 ---
 There are a lot of reasons for moving your local files into your AWS S3 bucket. Maybe you want to host your static files with S3 or you want to make a backup of your database, etc... In this tutorial we will show how to do this in a quck and efficient way with AWS CLI, whithout wasting your time by clicking on your AWS Console Management buttons. Using AWS CLI will speed up your uploading process and also you can include a lot of options with only one command. 
 

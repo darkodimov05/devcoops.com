@@ -3,7 +3,7 @@ layout: post
 title:  "How to create a Wordpress Stack using Docker Compose"
 categories: [ docker ]
 image: assets/images/wpdocker.jpg
-tags: [docker, docker compose, wordpress, lamp]
+tags: [ docker, docker compose, wordpress, lamp ]
 ---
 Wordpress is an open source content management system (CMS) written in PHP and it's the easiest and most powerful blogging and website CMS in the world. Dockerizing the Wordpress stack will help you to set up a Wordpress stack in just a few minutes instead of installing it from scratch. In this tutorial, we will cover the steps needed for setting up a Wordpress stack using docker-compose.
 

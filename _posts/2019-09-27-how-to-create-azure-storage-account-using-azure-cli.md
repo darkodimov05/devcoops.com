@@ -3,7 +3,7 @@ layout: post
 title:  "Create Azure storage account using Azure CLI"
 categories: [ azure ]
 image: assets/images/azure-cloud-shell-storage-account.png
-tags: [azure, azure-cli]
+tags: [ azure, azure-cli ]
 ---
 An Azure storage account is used to store all of your Azure data objects. For example: blobs, files, disks, tables, and queues. Even though the storage account is publicly accessible over HTTP or HTTPS using endpoints, it is securable, highly available, durable and scalable.  
 
@@ -58,7 +58,6 @@ az storage account list --resource-group storage-rg
 ```
 
 ## Cleanup
-
 If we aren't using the storage account anymore, we can delete the resource group using the following command:
 ```bash
 az group delete --name storage-rg

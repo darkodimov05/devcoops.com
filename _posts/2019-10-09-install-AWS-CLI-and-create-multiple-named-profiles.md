@@ -154,5 +154,4 @@ user2
 ```
 
 ## Conclusion
-
 In this tutorial we learned how to install and use AWS CLI, and how to switch over your AWS profiles. For more details on how to use `AWS CLI` you can find at [AWS CLI Documentation](https://aws.amazon.com/cli/).

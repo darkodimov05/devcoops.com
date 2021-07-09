@@ -3,7 +3,7 @@ layout: post
 title:  "Manage Azure subscriptions"
 categories: [ azure ]
 image: assets/images/azure-cloud-shell-subscriptions.png
-tags: [azure, azure-cli]
+tags: [ azure, azure-cli ]
 ---
 Azure subscriptions are used for deploying and consuming Azure resources. A single Azure account can have multiple subscriptions, but there are some limitations. You can combine multiple Azure resources into a single Azure Resource Group. These groups are managed by [Azure Resource Manager](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview).  
 According to Microsoft, there are two *Subscription limits* tables: **Subscription limits** and **Subscription limits - Azure Resource Manager**.  

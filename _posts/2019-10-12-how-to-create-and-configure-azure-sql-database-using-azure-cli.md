@@ -87,6 +87,5 @@ az group delete --name "azure-sql-db-rg"
 ```
 
 ## Conclusion
-If you are already using Azure ecosystem, migrating your on-premises SQL database to the Azure will improve the availability and performance while interacting with the other Azure services.
-
+If you are already using Azure ecosystem, migrating your on-premises SQL database to the Azure will improve the availability and performance while interacting with the other Azure services.  
 In the next posts, i'll show you additional Azure SQL database operations, like how to lost a recover admin password, rename a database, backup and restore, and how to migrate your on-premise SQL database to the Azure cloud.

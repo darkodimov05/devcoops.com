@@ -3,7 +3,7 @@ layout: post
 title:  "How to fix kernel driver not installed (rc=-1908) on Mac"
 categories: [ mac ]
 image: assets/images/mac-vbox-error.jpg
-tags: [mac, virtualbox]
+tags: [ mac, virtualbox ]
 ---
 The first time you try to spin up a VM on Mac, you will probably go with VirtualBox as a Hypervisor, and honestly VBox is pretty good for beginners who just want to get the things done. It's simple, easy to use, open-source, and the most popular one. But, the first time you try to start a VM, you will most probably get the following error:  
 ```bash

@@ -3,7 +3,7 @@ layout: post
 title:  "How to create http to https Nginx redirect"
 categories: [ nginx ]
 image: assets/images/nginxredirect.jpg
-tags: [nginx, cloud, ubuntu, proxy, linux]
+tags: [ nginx, cloud, ubuntu, proxy, linux ]
 ---
 As we know Nginx has a lot of great features, one of them is to redirect your website from `http` to `https`. Using https is more secure which means that the communication between the client and the server is encrypted in both directions. Redirecting the traffic from `http` to `https` is the most common task if you are working as a DevOps or System Administrator. Nginx as a reverse proxy web server offers a lot of redirect rules but in this tutorial, we will take a look at the few of them.
 

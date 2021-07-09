@@ -3,7 +3,7 @@ layout: post
 title:  "How to resolve AWS ElasticSearch cluster in red or yellow state"
 categories: [ aws ]
 image: assets/images/aws-es-state.jpg
-tags: [aws, elk, elasticsearch]
+tags: [ aws, elk, elasticsearch ]
 ---
 If your ELK cluster has been deployed on AWS ElasticSearch managed service, and your position is to keep the cluster health green then you should follow the steps below to accomplish that. The `Cluster health` tab in your Amazon ES console indicates the status of the least healthy index in your cluster. So you may wonder why your status is `red` or `yellow`? 
 - `red status:`  indicates that at least one primary shard and its replicas aren't allocated to a node
@@ -83,5 +83,5 @@ curl -XPUT 'ES_Endpoint/<indexname>/_settings'
 ```
 
 ## Conclusion
-If you closely follow the above steps, your AWS ElasticSearch cluster should get back to his previous green state.
+If you closely follow the above steps, your AWS ElasticSearch cluster should get back to his previous green state.  
 Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

@@ -3,7 +3,7 @@ layout: post
 title:  "How to install and setup ELK Stack on Ubuntu"
 categories: [ elasticsearch ]
 image: assets/images/elkend.jpg
-tags: [elk, cloud, elasticsearch, Ubuntu]
+tags: [ elk, cloud, elasticsearch, ubuntu ]
 ---
 ELK Stack is a combination of three open source tools which forms a log management tool. ELK Stack is a platform that helps in deep searching, analyzing, and visualizing the log generated from different machines.
 

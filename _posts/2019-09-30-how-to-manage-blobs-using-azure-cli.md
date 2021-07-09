@@ -3,7 +3,7 @@ layout: post
 title:  "How to manage blobs using Azure CLI"
 categories: [ azure ]
 image: assets/images/azure-cloud-shell-blobs.png
-tags: [azure, azure-cli]
+tags: [ azure, azure-cli ]
 ---
 In the last Azure [post]({% post_url 2019-09-27-how-to-create-azure-storage-account-using-azure-cli %}) we have discussed the different types of Azure storage accounts and created one using the Azure CLI. Next, we are going to upload, download and list blob files named **Blobs**.  
 **Blobs** is a REST-based object storage service that is used for storing large ammount of unstructured data, such as text, or binaries. The most common scenario for **Blob Storage** is serving static website using **CDN** (Content Delivery Network). Other examples may include:
@@ -99,6 +99,5 @@ az group delete --name storage-rg
 ```
 
 ## Next steps
-Instead of using storage access key, we'll configure a shared access signature known as SAS token.
-
+Instead of using storage access key, we'll configure a shared access signature known as SAS token.  
 Official documentation: [Upload, download, and list blobs using the Azure CLI](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli).
