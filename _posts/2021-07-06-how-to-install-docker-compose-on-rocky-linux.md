@@ -5,7 +5,7 @@ categories: [ docker ]
 image: assets/images/compose-rocky-8.jpg
 tags: [docker, rockylinux, linux]
 ---
-Installing Docker Compose on Rocky Linux follows the same procedure as the other Linux distros. Docker Compose relies on Docker Engine so first, you need to make sure that you have installed  [Docker](https://devcoops.com/how-to-install-docker-on-rocky-linux/) on your Rocky Linux machine. So once the Docker is set up on your machine you can proceed with the instructions about the Docker Compose.
+Installing Docker Compose on Rocky Linux follows the same procedure as the other Linux distros. Docker Compose relies on Docker Engine so first, you need to make sure that you have installed [Docker](https://devcoops.com/how-to-install-docker-on-rocky-linux/) on your Rocky Linux machine. So once the Docker is set up on your machine you can proceed with the instructions about the Docker Compose.
 
 ## Prerequisites
 * Rocky Linux 8

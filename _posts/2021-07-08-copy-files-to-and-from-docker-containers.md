@@ -8,7 +8,7 @@ tags: [docker, docker cp, terminal, cli]
 Docker copy command allows you to copy files/folders from the container’s file system to the local machine or the reverse, from the local filesystem to the container. In this tutorial, I'm gonna cover these two scenarios.
 
 ## Prerequisites
-* Docker installed 
+* Docker 
 
 ## Copying files/folders from Local Machine to Docker Container
 **Step 1**. To copy the file from your host machine to the docker container, you need to list the running containers and get the `id` of the desired container:
