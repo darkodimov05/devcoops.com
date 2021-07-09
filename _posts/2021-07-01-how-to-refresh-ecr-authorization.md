@@ -3,7 +3,7 @@ layout: post
 title:  "How to refresh AWS ECR authorization token"
 categories: [ aws ]
 image: assets/images/aws-ecr-auth-token.jpg
-tags: [aws, ecr, cli, docker]
+tags: [ aws, ecr, cli, docker ]
 ---
 AWS ECR is a managed container registry which allows us to store, manage and deploy container images, mostly Docker images. Similar to Docker Hub, ECR supports two types of registries: public and private. As you may guess, you will need some kind of authentication and authorization in order to pull or push images on private registry. At the time of writing there are three methods for private authentication:
 

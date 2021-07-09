@@ -3,7 +3,7 @@ layout: post
 title:  "Generate SAS token for Azure storage containers using Azure CLI"
 categories: [ azure ]
 image: assets/images/azure-cli-sas-token-storage.jpg
-tags: [azure, azure cli, azure storage]
+tags: [ azure, azure cli, azure storage ]
 ---
 As a part of the [Azure](https://devcoops.com/categories#azure) series, today we are going to generate SAS token for the Azure storage containers using the azure CLI. It's pretty much the same steps as generating SAS token for a blob, but instead of using the [*azure storage blob generate-sas*](https://docs.microsoft.com/en-us/cli/azure/storage/blob?view=azure-cli-latest#az-storage-blob-generate-sas), we are going to use [*azure storage container generate-sas*](https://docs.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-generate-sas).
 
@@ -51,6 +51,5 @@ It will return SAS token:
 az storage account revoke-delegation-keys --name devcoopsstorage1 --resource-group storage-rg
 ```
 
-**Note**: Azure Storage cache the user delegation key, so there could be a delay window between the initiation of the revocation process and the invalidation of the **user delegation SAS**.  
-
+**Note**: Azure Storage cache the user delegation key, so there could be a delay window between the initiation of the revocation process and the invalidation of the **user delegation SAS**.   
 Official documentation: [Create a user delegation SAS for a container or blob with the Azure CLI](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-cli).

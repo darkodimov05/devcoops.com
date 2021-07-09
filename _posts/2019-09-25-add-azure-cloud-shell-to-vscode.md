@@ -3,7 +3,7 @@ layout: post
 title:  "Add Azure Cloud Shell to Visual Studio Code"
 categories: [ azure ]
 image: assets/images/azure-cloud-shell-vscode.png
-tags: [azure, azurecloudshell, vscode, visualstudiocode]
+tags: [ azure, azurecloudshell, vscode, visualstudiocode ]
 ---
 Visual Studio Code is a code editor developed by Microsoft, which is currently supported on Mac and Linux as well. It can be customized via extensions. Today we are going to integrate it with the [Azure Cloud Shell](https://shell.azure.com).
 

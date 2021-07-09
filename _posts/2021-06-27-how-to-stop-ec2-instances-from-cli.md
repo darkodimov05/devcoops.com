@@ -3,7 +3,7 @@ layout: post
 title:  "How to stop all running EC2 instances from the command line"
 categories: [ aws ]
 image: assets/images/aws-stop-ec2.jpg
-tags: [aws, ec2, cli]
+tags: [ aws, ec2, cli ]
 ---
 Stopping preproduction, staging environment EC2 instances could be described sometimes as a good practice,
 espesially from cost and even a security standpoint. In the next few lines, I'll show you how you can easily stop 

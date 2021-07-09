@@ -3,7 +3,7 @@ layout: post
 title:  "How to install Terraform CLI on Ubuntu 20.04"
 categories: [ terraform ]
 image: assets/images/terraform-ubuntu.jpg
-tags: [terraform, cloud, ubuntu, linux]
+tags: [ terraform, cloud, ubuntu, linux ]
 ---
 Terraform is an open-source tool, created by HashiCorp. It's an Infrastructure as Code tool that enables developers and DevOps to use configuration language called HCL (HashiCorp Configuration Language). Terraform uses a simple syntax and you can provision infrastructure across all the cloud providers and on-premises data centers, which makes it one of the most popular `infrastructure as code` tools. If you need to deploy a `hybrid cloud` or `multicloud` environment, you should definitely want to get to know Terraform.
 

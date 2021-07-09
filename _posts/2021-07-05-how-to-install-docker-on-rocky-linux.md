@@ -3,7 +3,7 @@ layout: post
 title:  "How to install Docker on Rocky Linux 8"
 categories: [ docker ]
 image: assets/images/docker-rockylinux8.jpg
-tags: [docker, rockylinux, linux]
+tags: [ docker, rockylinux, linux ]
 ---
 In the early December last year, RedHat took us all by suprise with the CentOS 8 End Of Life (EOL) [announcement](https://blog.centos.org/2020/12/future-is-centos-stream){:target="_blank"}, that was scheduled for the end of 2021. In response to this, the original CentOS founder has created a fresh project which is called Rocky Linux. The project quickly gained it's popularity among many clients of the cloud computing giants AWS, Azure and Google Cloud. This is a great opportunity for the distro to proof docker capabilities. In the following steps, we will see how we can quickly install and setup Docker CE.
 

@@ -3,7 +3,7 @@ layout: post
 title:  "Generate SAS token for blobs in Azure storage using Azure CLI"
 categories: [ azure ]
 image: assets/images/azure-cli-sas-token-storage.jpg
-tags: [azure, azure cli, azure storage]
+tags: [ azure, azure cli, azure storage ]
 ---
 A shared access signature (SAS) provides secure and temporary access to the resources in a storage account. You can configure access to specific objects, as well as permissions and SAS token validation time.
 
@@ -88,6 +88,5 @@ az storage account revoke-delegation-keys --name devcoopsstorage1 --resource-gro
 ```
 
 ## Next steps
-We can try to grant limited access to storage containers as well using **user delegation SAS**.
-
+We can try to grant limited access to storage containers as well using **user delegation SAS**.  
 Official documentation: [Create a user delegation SAS for a container or blob with the Azure CLI](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-user-delegation-sas-create-cli).

@@ -3,7 +3,7 @@ layout: post
 title:  "How to install Docker Compose on Ubuntu 19.04"
 categories: [ docker ]
 image: assets/images/dockercom.jpg
-tags: [docker, docker compose, ubuntu, linux]
+tags: [ docker, docker compose, ubuntu, linux ]
 ---
 Docker Compose is a tool for defining and running multiple Docker applications. With Docker Compose you use a compose file to configure your application's services then using a single command to create and start all the services from your configuration. 
 We can use Compose as a single host application deployment, for local development, automated testing, etc... 

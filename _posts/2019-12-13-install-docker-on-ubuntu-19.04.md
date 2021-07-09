@@ -3,7 +3,7 @@ layout: post
 title:  "How to install docker on Ubuntu 19.04"
 categories: [ docker ]
 image: assets/images/docker.jpg
-tags: [docker, cloud, ubuntu, linux]
+tags: [ docker, cloud, ubuntu, linux ]
 ---
 Docker is mainly a software development platform and a kind of virtualization technology that makes it easy for us to develop and deploy applications inside of neatly packaged virtual containerized environments. This means that apps run the same, no matter where they are of what machine they are running on, so your software stays system agnostic, making software simpler to use, less work to develop, and easy to maintain and deploy. These containers running on your computer or server act like little micro computers each with very specific jobs, with their own operating system and their own isolated CPU and network resources.
 A developer will usually start by accessing the Docker Hub, and online cloud repository of docker containers and pull one containing a pre-configured environment for their specific programming language.
@@ -149,5 +149,4 @@ sudo docker info | grep "Data Space"
 ```
 
 ## Conclusion
-In this tutorial we shown you `how to install docker on Ubuntu 19.04` and if you have some further questions please put a comment in the box below. For more information about using docker you can find in the [docker official documentation](https://docs.docker.com/) 
-
+In this tutorial we shown you `how to install docker on Ubuntu 19.04` and if you have some further questions please put a comment in the box below. For more information about using docker you can find in the [docker official documentation](https://docs.docker.com/)

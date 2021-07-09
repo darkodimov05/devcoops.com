@@ -3,7 +3,7 @@ layout: post
 title:  "How to install Terraform on Rocky Linux"
 categories: [ terraform ]
 image: assets/images/rocky.jpg
-tags: [terraform, cloud, rocky, linux, rockylinux]
+tags: [ terraform, cloud, rocky, linux, rockylinux ]
 ---
 Rocky Linux was kicked off by CentOS co-founder Gregory Kurtzer in December after CentOS's Linux parent company and the goal is to replace CentOS cause RedHat announced it would shift focus from CentOS Linux to CentOS Stream. So it turns out that the decision becomes popular cause the distro was downloaded at least 10,000 times within half a day of its release. In this tutorial I'll cover the steps on how to install terrafrom on Rocky Linux 8.
 

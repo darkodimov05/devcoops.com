@@ -8,7 +8,7 @@ tags: [ postgresql, pg_dump, pg_restore, psql ]
 As an open-source database, PostgreSQL is in the top 3 most popularly used databases which offen can be find as a managed service 
 offered by the public cloud giants. In one of the previous posts, I've wrote about how easily you can create a PostgreSQL database
 in Azure. You can find the link [here]({% post_url 2019-10-23-how-to-create-azure-postgresql-database-using-azure-cli %}){:target="_blank"}.  
-Anyway, in today's blog post, I'm going to show you how can you backup and restore postgreSQL databases from the command line.
+Anyway, in today's blog post I'm going to show you how can you backup and restore postgreSQL databases from the command line.
 Backing up and restoring databases could be found quite handy, especially in situations when something goes wrong. The most common cases are:
 someone accidently drop the database, rollbacking a new release, or even worse, unauthorized access of your company data.  
  **Note**: `backup` and `dump` will be used interchangeably through the post.

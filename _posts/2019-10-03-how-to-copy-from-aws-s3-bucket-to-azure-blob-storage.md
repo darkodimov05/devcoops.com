@@ -3,7 +3,7 @@ layout: post
 title:  "How to copy from AWS S3 bucket to Azure Blob Storage"
 categories: [ azure, aws ]
 image: assets/images/aws-s3-to-azure-blob-storage.jpg
-tags: [aws, azure, azcopy, azure blob]
+tags: [ aws, azure, azcopy, azure blob ]
 ---
 When we mention public cloud and devops, we often think of Amazon Web Services, Microsoft's Azure or Google Cloud Platform. As AWS becomes dominant public cloud leader through the years, many corporations and startups started to migrate their on-premises infrastructure to the cloud, especially AWS. This often leads to public cloud vendor lock-in. But, if someday you decide to migrate to Azure, you might face up many challenges. For example, if you want to migrate your S3 bucket to Azure Storage, you will have to write your own custom scripts or even come up with your own custom tools. This adds to complexity. So, in today's blog, we are going to talk about how to migrate/copy AWS S3 buckets to Azure Blob Storage using a tool called **azcopy** that will help you move your AWS S3 buckets to the Azure storage service.
 
@@ -89,6 +89,5 @@ azcopy cp "https://s3.eu-west-1.amazonaws.com/" "https://devcoopsstorage.blob.co
 ```
 
 ## Conclusion
-**AzCopy** is a fast and simple tool, which can also be scheduled as part of backup and/or sync operations.
-
+**AzCopy** is a fast and simple tool, which can also be scheduled as part of backup and/or sync operations.  
 Official documentation: [Copy data from Amazon S3 buckets by using AzCopy](https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-s3){:target="_blank"}.

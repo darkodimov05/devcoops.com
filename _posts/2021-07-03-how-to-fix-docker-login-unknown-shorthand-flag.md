@@ -3,7 +3,7 @@ layout: post
 title:  "How to fix Docker login unknown shorthand flag error"
 categories: [ docker, aws ]
 image: assets/images/docker-aws-ecr-issue.jpg
-tags: [docker, aws, ecr, cli]
+tags: [ docker, aws, ecr, cli ]
 ---
 In some of the previous posts I've covered the Authorization token method when authenticating to an AWS ECR private registry. If you have followed the steps as described in the [post]({% post_url 2021-07-01-how-to-refresh-ecr-authorization %}){:target="_blank"} you won't get any errors unless you try to go with `aws ecr get-login` command instead of `aws ecr get-login-password`. So, if you try to run the output from `aws ecr get-login`, you'll get the following error:
 ```bash

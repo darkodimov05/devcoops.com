@@ -3,7 +3,7 @@ layout: post
 title:  "How to configure Nginx as a simple and robust load balancer"
 categories: [ nginx ]
 image: assets/images/nginxend.jpg
-tags: [nginx, cloud, reverse proxy, proxy, linux]
+tags: [ nginx, cloud, reverse proxy, proxy, linux ]
 ---
 Nowadays load balancers are mostly used for improving the distribution of workloads across multiple computing resources, improving the scalability, redundancy and the deliverability of the resources. In short, a load balancer should achieve two main objectives:
 
