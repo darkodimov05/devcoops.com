@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to Backup and Restore a PostgreSQL DB"
+title:  "How to Backup and Restore a PostgreSQL Database"
 categories: [ postgresql ]
 image: assets/images/postgresql-bkp-restore.jpg
 tags: [ postgresql, pg_dump, pg_restore, psql ]
@@ -11,13 +11,13 @@ in Azure. You can find the link [here]({% post_url 2019-10-23-how-to-create-azur
 Anyway, in today's blog post I'm going to show you how can you backup and restore postgreSQL databases from the command line.
 Backing up and restoring databases could be found quite handy, especially in situations when something goes wrong. The most common cases are:
 someone accidently drop the database, rollbacking a new release, or even worse, unauthorized access of your company data.  
- **Note**: `backup` and `dump` will be used interchangeably through the post.
+**Note**: `backup` and `dump` will be used interchangeably through the post.
 
 ## Prerequisites
 * PostgreSQL
 
 ## Backing up a PostgreSQL database
-Backing up a postgreSQL can be done in multiple ways, from the cli using the `pg_dump` utility, or via GUI using `pgAdmin`. Let's see how can we do a backup via `pg_dump`:
+Backing up a postgreSQL can be done in multiple ways, from the cli using the `pg_dump` command utility tool, or via GUI using `pgAdmin`. Let's see how can we do a backup via `pg_dump`:
 ```bash
 pg_dump -h 0.0.0.0 -p 5432 -U <username> -Fc <db_name> > <db_name>.dump
 ```
@@ -40,7 +40,7 @@ pg_dump -h 0.0.0.0 -p 5432 -U <username> -d <db_name> | gzip > <db_name>.dump.gz
 ```
 
 ## Restoring a PostgreSQL database
-Restoring a database can be done in multiple ways as well, from the cli using `psql`, `pg_restore` utilities, or via GUI using `pgAdmin`. Let's see how can we do it from the command line.  
+Restoring a database can be done in multiple ways as well, from the cli using `psql`, `pg_restore` command utility tools, or via GUI using `pgAdmin`. Let's see how can we do it from the command line.  
 `pg_restore`:
 ```bash
 pg_restore -h 0.0.0.0 -p 5432 -U <username> -d <db_name> <db_name>.dump
