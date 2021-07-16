@@ -62,4 +62,4 @@ Total Size: 105.6 GiB
 
 ## Conclusion
 My two cents is to always use S3 bucket lifecycle policy or S3 intelligent tiering which will help you reduce your AWS costs.
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

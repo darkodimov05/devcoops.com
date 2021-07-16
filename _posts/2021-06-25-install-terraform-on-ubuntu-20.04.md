@@ -36,4 +36,4 @@ on linux_amd64
 
 ## Conclusion
 This tutorial shows you how to install Terraform CLI on Ubuntu 20.04. For more info please visit the official documentation at [ terraform documentation ](https://www.terraform.io/docs/index.html).  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

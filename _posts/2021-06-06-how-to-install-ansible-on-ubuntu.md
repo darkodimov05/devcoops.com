@@ -47,4 +47,4 @@ sudo apt-get purge --auto-remove ansible
 
 ## Conclusion
 This tutorial shows you how to install the latest ansible version on Ubuntu, and if you decide to use other automation tool instead of ansible there is a section on how to remove it depending on your needs.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

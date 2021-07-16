@@ -29,4 +29,4 @@ Let's see how can we fix it in two steps.
 
 ## Conclusion
 At first, you might not see the `Allow` button, wait for 30 minutes and then try again. If the `Allow` button is still not shown, try to uninstall VirtualBox either by running the `VirtualBox_Uninstall.tool` which can be found when you mount the VBox disk image, or manually remove any leftover files under `/Library/` path. Then, try to run a fresh installation again.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

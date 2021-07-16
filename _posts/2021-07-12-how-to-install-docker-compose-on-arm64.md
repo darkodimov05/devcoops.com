@@ -42,4 +42,4 @@ sudo rm /usr/local/bin/docker-compose
 
 ## Conclusion
 Installing Docker Compose on arm64 is just as easy as the x86_64 one. At the end of the day, I think it might be more convinient to install and run docker-compose as a container instead as a binary just because we almost treat everything as a microservice in the cloud, or we can simple wait Compose v2 to be stable and ready as a non-beta release.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

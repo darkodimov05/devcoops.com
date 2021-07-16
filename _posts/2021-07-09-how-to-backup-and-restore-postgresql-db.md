@@ -63,4 +63,4 @@ gunzip -c <db_name>.dump.gz | psql -h 0.0.0.0 -p 5432 -U <username> <db_name>
 
 ## Conclusion
 My 2 cents are always have a backup and recovery procedures for your databases, or even your infrastructure. Review, update and automate it frequently. An early adoption could save a lot of time and stress, especially if things go south on the weekends.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

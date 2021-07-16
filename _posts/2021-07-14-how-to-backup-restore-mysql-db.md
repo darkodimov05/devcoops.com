@@ -54,4 +54,4 @@ mysql -u <user> -p <db_name> < <db_name>_$(date +%Y_%m_%d-%H:%M).sql
 
 ## Conclusion
 As a best practice, automating the backup procedure is a must. Usually, it can be done in multiple ways although the most common one is by creating a cronjob.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

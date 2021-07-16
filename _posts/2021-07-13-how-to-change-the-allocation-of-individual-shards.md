@@ -54,4 +54,4 @@ curl -XPUT 'ES_Endpoint/<indexname>/_settings'
 
 ## Conclusion
 This tutorial will help you to reallocate the unassigned shards in your ES Cluster and avoid any data loss.
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

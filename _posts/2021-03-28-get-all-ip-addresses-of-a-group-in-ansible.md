@@ -61,4 +61,4 @@ discovery.zen.ping.unicast.hosts: ["192.168.10.1", "192.168.10.2", "192.168.10.3
 In this post, we covered all the needed steps to concatenate a list of IP addresses of an Ansible group with double quotes and space between them.  
 More about the [map](https://jinja.palletsprojects.com/en/2.11.x/templates/#map) function.  
 More about the [join](https://jinja.palletsprojects.com/en/2.11.x/templates/#join) function.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

@@ -94,4 +94,4 @@ docker run --rm --name test-me hello-world
 
 ## Conclusion
 Installing Docker on Rocky Linux 8 should be an easy procedure and it's kinda the same as installing on any other Linux distribution. In some of the future posts, we will cover on how you can install docker-compose as well.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

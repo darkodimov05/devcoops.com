@@ -74,4 +74,4 @@ aws ec2 stop-instances --instance-ids $(aws ec2 describe-instances --filters Nam
 
 ## Conclusion
 The next key step is automation. You could use a cronjob on your local machine, HA server or even better, deploy a lambda function that will trigger the stop command. On the other hand, don't forget to create a command that will start all stopped EC2 instances every morning. This will be covered in the next upcoming posts.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
