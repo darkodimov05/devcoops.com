@@ -53,4 +53,4 @@ After executing the command you will be connected inside the container, and you 
 
 ## Conclusion
 This tutorial shows you how can you connect your AWS ECS or EKS Fargate container trough ssh. For more info visit the [aws documentation](https://aws.amazon.com/blogs/containers/new-using-amazon-ecs-exec-access-your-containers-fargate-ec2/).     
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

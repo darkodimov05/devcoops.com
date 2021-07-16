@@ -84,4 +84,4 @@ curl -XPUT 'ES_Endpoint/<indexname>/_settings'
 
 ## Conclusion
 If you closely follow the above steps, your AWS ElasticSearch cluster should get back to his previous green state.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

@@ -25,4 +25,4 @@ Deploying your ECS services through CloudFormation sometimes can cause odd issue
 **Step 5**. You can leave the other configuration as it is, so that way it will trick the CF and force a new deployment to get back the CF stack to the previous stable state.
 
 ## Conclusion
-In this tutorial, we covered all the needed steps to fix *ECS* services that are deployed through the *CloudFormation* template which is stuck in `UPDATE_ROLLBACK_FAILED` state. Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+In this tutorial, we covered all the needed steps to fix *ECS* services that are deployed through the *CloudFormation* template which is stuck in `UPDATE_ROLLBACK_FAILED` state. Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

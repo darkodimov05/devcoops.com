@@ -62,4 +62,4 @@ az group delete --name rg-aks-test
 ## Conclusion
 This is an awesome way to save some money, especially if you running an AKS cluster in dev or staging/preprod environments. The next step should be automation (DevOps right?!), setting up a scheduled task that will start the cluster early in the morning as you are getting your first cup of coffee and stopping the cluster after working hours. I'll leave this as a future post idea.  
 More about [Stop and Start an Azure Kubernetes Cluster (AKS) cluster](https://docs.microsoft.com/en-us/azure/aks/start-stop-cluster){:target="_blank"}.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

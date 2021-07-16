@@ -33,4 +33,4 @@ sudo sh -c "docker ps -q | xargs docker inspect --format='{{ .State.Pid }}' | xa
 
 ## Conclusion
 I wouldn't recommend using Jenkins in a dockerized environment, but if you already have it for your infra and it is causing space issues, you can set up a `cronjob` in Jenkins with the commands above.
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.

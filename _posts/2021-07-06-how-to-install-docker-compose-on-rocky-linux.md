@@ -45,4 +45,4 @@ sudo rm /usr/local/bin/docker-compose
 
 ## Conclusion
 Installing Docker Compose on Rocky Linux 8 is an easy procedure and if you followed the steps above you should have successfully installed Compose on `Rocky Linux 8`.  
-Feel free to leave a comment below if you find this tutorial useful and follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
+Feel free to leave a comment below and if you find this tutorial useful, follow our official channel on [telegram](https://t.me/devopsblogposts){:target="_blank"}.
