@@ -5,7 +5,7 @@ categories: [ mac ]
 image: assets/images/mac-powershell.jpg
 tags: [ powershell, macos ]
 ---
-Most of us devops engineers like to work on our cool and comfy MacBook Pros. And if you are working with Azure, you will most probably need to install PowerShell at some point. There are few ways to do it, so let's see how we can install PowerShell the easiest way possible.
+As a devops engineer, we most likely would prefer to work with our cool and comfy MacBook Pros. And if you are working with Azure, you will most probably need to install PowerShell at some point. There are few ways to do it, so let's see how we can install PowerShell the easiest way possible.
 
 ## Prerequisites
 * Brew
