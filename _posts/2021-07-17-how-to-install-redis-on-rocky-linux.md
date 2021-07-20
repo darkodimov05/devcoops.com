@@ -14,7 +14,7 @@ Redis stands as an open-source in-memory key-value data store and you can use it
 ## Install Redis on Rocky Linux 8
 **Step 1**. Run system update command:
 ```bash
-sudo dfn update
+sudo dnf update
 ```
 
 **Step 2**. Enable `EPEL` repository :
