@@ -58,7 +58,7 @@ The state has been unlocked, and Terraform commands should now be able to
 obtain a new lock on the remote state.
 ```
 
-**Note**: You can find the <ID> from the error's lock info section above. In my case, the ID value is:  
+**Note**: You can find the `ID` from the error's lock info section above. In my case, the ID value is:  
 ```bash
 c2024f2b-b615-05bf-e516-e49ed2852087
 ```
