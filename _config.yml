@@ -11,11 +11,6 @@ google_analytics: UA-148517499-1
 discus-identifier: devcoops-com # add your discus identifier
 comments: true
 
-# Twitter
-twitter:
-  username: devcoops1
-  card: summary_large_image
-
 include: ["_pages"]
 permalink: /:title/
 
