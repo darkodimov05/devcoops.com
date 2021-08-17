@@ -6,7 +6,7 @@
 
 <script>
 var disqus_loaded = false;
-var disqus_shortname = 'devcoops-com'; //Add your shortname here
+var disqus_shortname = 'devcoops-com';
 function disqus() {
     if (!disqus_loaded)  {
         disqus_loaded = true;
@@ -17,12 +17,10 @@ function disqus() {
         (document.getElementsByTagName("head")[0] ||
         document.getElementsByTagName("body")[0])
         .appendChild(e);
-        //Hide the button after opening
         document.getElementById("show-comments-button").style.display = "none";
     }
 }
 
-//Opens comments when linked to directly
 var hash = window.location.hash.substr(1);
 if (hash.length > 8) {
     if (hash.substring(0, 8) == "comment-") {
@@ -30,7 +28,6 @@ if (hash.length > 8) {
     }
 }
 
-//Remove this if you don't want to load comments for search engines
 if(/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)) {
    disqus();
 }
