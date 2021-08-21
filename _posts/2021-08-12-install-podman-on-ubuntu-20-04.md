@@ -40,7 +40,7 @@ sudo apt -y install podman
 
 **Step 6**. Verify the installation:
 ```bash
-podman  info
+podman info
 ```
 
 ## Conclusion
