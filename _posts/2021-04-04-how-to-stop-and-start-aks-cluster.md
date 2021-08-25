@@ -3,16 +3,14 @@ layout: post
 title:  "How to stop and start Kubernetes cluster on Azure"
 categories: [ azure, kubernetes ]
 image: assets/images/azure-aks-start-stop.jpeg
-tags: [ azure, azure-cli, kubernetes ]
+tags: [ azure, azure-cli, aks, kubernetes ]
 ---
 In the previous Azure [post]({% post_url 2021-03-14-how-to-create-kubernetes-cluster-on-azure %}){:target="_blank"}, we've shown how to create an Azure Kubernetes Service (AKS) cluster via the Azure CLI. Today, we'll focus on how to stop and start AKS cluster using the official way. What the official way means anyway, you could ask. Well, before now, in order to save some infrastructure money, you need to scale down the User Node Pools to 0, but at at the end of each month, you'll still be charged for the system node pools which was running 24/7, unless you delete the AKS cluster. And, in the last couple of months, Azure came up with a feature that can stop the control plane (the system node pool) and the agent nodes as well.
-
 
 ## Prerequisites
 * Azure account  
 * Azure CLI  
 * Azure Kubernetes Cluster
-
 
 ## Stop the AKS Cluster
 **Step 1**. Stop the cluster:    

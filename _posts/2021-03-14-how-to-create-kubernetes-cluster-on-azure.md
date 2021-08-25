@@ -3,15 +3,13 @@ layout: post
 title:  "How to create Kubernetes cluster on Azure"
 categories: [ azure, kubernetes ]
 image: assets/images/azure-aks.jpeg
-tags: [ azure, azure-cli, kubernetes ]
+tags: [ azure, azure-cli, aks, kubernetes ]
 ---
 Azure Kubernetes Service (AKS) is a managed Kubernetes service that helps you to deploy and manage clusters with ease. This post describes the commands in steps required to setup a Kubernetes cluster from the command line using the Azure CLI. 
-
 
 ## Prerequisites
 * Azure account  
 * Azure CLI  
-
 
 ## Create an Azure Kubernetes Service
 **Step 1**. Open *Terminal* and login to the Azure Portal:  

@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "GitHub hidden feature"
-categories: [ "github" ]
+categories: [ github ]
 image: assets/images/github-hidden-feature.png
-tags: [ "github" ]
+tags: [ github ]
 ---
 There is a mind-blowing GitHub feature or if I can call it a "secret", that I've just discovered and I need to share with you all. 
 

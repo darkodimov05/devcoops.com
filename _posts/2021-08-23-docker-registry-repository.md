@@ -10,7 +10,7 @@ Docker is one of that technologies that will probably stay for a while. In a mat
 ## Prerequisites
 * Docker
 
-## Docker repository
+## Docker Repository
 You can think of Docker repository as a GitHub repository, but instead of storing code, it stores multiple versions of your Docker image, by having different tags. `So, it's basically a collection or logical grouping of Docker images with the same name and the same purpose`. And the question now is, where do we get or create this Docker repositories?! You guessed it right, the Docker registry. 
 
 ## Docker Registry
