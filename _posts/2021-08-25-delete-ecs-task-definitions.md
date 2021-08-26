@@ -37,7 +37,7 @@ do
 done
 ```
 
-## Remove all task definiitions
+## Remove all task definitions
 Copy the script below on your local machine, replace `<region>` with your region, make it executable `chmod +x ./remove-all-task-definitions.sh`, and run the script `./remove-all-task-definitions.sh`.
 
 ```bash
