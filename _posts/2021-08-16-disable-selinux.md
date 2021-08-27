@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "How to disable SELinux"
-categories: [ selinux ]
+categories: [ linux ]
 image: assets/images/selinux-disable.jpg
-tags: [ selinux, linux ]
+tags: [ linux, selinux  ]
 ---
 SELinux is a security architecture for Linux systems that allows administrators to have more control over who can access the system. The SELinux Policy is the set of rules that guide the SELinux security engine. It defines types for file objects and domains for processes. Sometimes you may get permission issues due to SELinux, so in this tutorial I will cover the steps on how to disable selinux temporarily and permanently.
 
